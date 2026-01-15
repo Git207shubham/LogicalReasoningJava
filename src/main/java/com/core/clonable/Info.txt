@@ -1,0 +1,131 @@
+Why Cloneable is called a Marker Interface?
+public interface Cloneable { }
+
+No methods
+Just signals JVM that cloning is allowed
+JVM checks this at runtime
+
+==>
+How ArrayList cloning works internally
+
+===>
+--Copy constructor
+class Person {
+    int age;
+    String name;
+
+    Person(Person p) {
+        this.age = p.age;
+        this.name = p.name;
+    }
+}
+Person p2 = new Person(p1);
+
+No exception even if not a clonable , otherwise we may get
+runtime exception if we forgot to implement clonable
+
+Clean and easy to understand
+
+--Factory method
+Person copy() {
+    return new Person(this.age, this.name);
+}
+
+
+==>
+Shallow copy using Copy constructor,
+Object reference single object or list or array of objects is always shared ie common,
+
+class Person {
+    int age;
+    Address address;
+
+    // Copy constructor (SHALLOW)
+    Person(Person p) {
+        this.age = p.age;
+        this.address = p.address; // reference copied
+    }
+}
+
+Deep copy using Copy constructor
+class Person {
+    int age;
+    Address address;
+
+    // Copy constructor (DEEP)
+    Person(Person p) {
+        this.age = p.age;
+        this.address = new Address(p.address.city); // new object
+    }
+}
+
+
+======>
+Aspect	Constructor	clone()
+Exception	❌ No checked exception	❌ CloneNotSupportedException
+Visibility	✔️ Public	❌ protected
+Control	✔️ Full control	❌ Implicit behavior
+
+
+======>
+
+deep or shallow depends on how Copy constrctor or clone overriden or Factory method clone is implemented
+Shallow vs Deep is about WHAT you copy, not HOW you copy.
+primitive field → always copied
+object field    → copied OR recreated (your choice)
+
+===
+
+ArrayList<Integer> a1 = new ArrayList<>();
+a1.add(10);
+
+ArrayList<Integer> a2 = new ArrayList<>(a1);
+
+// array1 and array2 are same till here
+
+a2.set(0,20);
+--> creates new Integer object and returns objRefNew which is stored i array2 oth index
+
+unlike
+ a2.set(0,new Address(("NYC"));
+// modifies shared object
+// existing reference in array1 and array2 now points to new Object created
+// original array list also modified
+
+System.out.println(a1.get(0)); // 10
+System.out.println(a2.get(0)); // 20
+
+
+✔️ Safe — because Integer is immutable
+
+====
+
+when we create a new ArrayList ,
+ArrayList arList = new ArrayList<>();
+
+arList = address1 stored in stack memory
+new ArrayList()  Object is created and store in heap
+an array of Objects in created in heap memory and has no elements store ie no reference ie addresses stored so blank array
+
+arList.add(new Student());
+now :
+an Object of Student is created and stored in heap memory with address : address2
+and no reference is created in stack
+new array of Object is created with size x using elementData created earlier and address2 is stored in array[0]
+
+arList.add(new Student());
+now :
+a new Object of Student is created and stored in heap memory with address : address3
+and no reference is created in stack
+new array of Object is created with size x and all references are copied from earlier array to new array
+address2 is stored in array[0]
+
+====
+
+ArrayList.clone() does ONLY this:
+- create a new ArrayList object
+- create a new internal array
+- copy references from old array to new array
+
+
+
