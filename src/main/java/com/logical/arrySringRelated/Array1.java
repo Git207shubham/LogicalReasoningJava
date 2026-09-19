@@ -265,15 +265,14 @@ class ArrayMethodsDemo {
 
 
         //convertArrayToListAndSet();
-
         String[] stringArray = {"A", "B", "C", "A"};
 
         /* =====================================================
            1. Arrays.asList(array)
+           Only works with Non-primitive , Wrapper , Custom objects
            RETURN TYPE: List<T>
            fixed-size List of same datatype as of the input array
            Its not an Arraylist or any other , its special list
-           Only works with Non-primitive , Wrapper , Custom objects
         ===================================================== */
         List<String> list1 = Arrays.asList(stringArray);
 
@@ -293,6 +292,7 @@ class ArrayMethodsDemo {
 
         /* =====================================================
            2. new ArrayList<>(Arrays.asList(array))
+           Only works with Non-primitive , Wrapper , Custom objects
            RETURN TYPE: ArrayList<T>
         ===================================================== */
         List<String> list2 = new ArrayList<>(Arrays.asList(stringArray));
@@ -309,7 +309,8 @@ class ArrayMethodsDemo {
 
 
         /* =====================================================
-           3. Collections.addAll(list, array)
+           3. Collections.addAll(list, nonPrimitiveWrapperStringCustomArrays)
+           Only works with Non-primitive , Wrapper , Custom objects
            RETURN TYPE: ArrayList<T>
         ===================================================== */
         List<String> list3 = new ArrayList<>();
@@ -332,121 +333,100 @@ class ArrayMethodsDemo {
         List<String> list4 = Arrays.stream(stringArray).
                 collect(Collectors.toList());
 
-        int[]--> boxed().colleact(Colectiors.toList());
+        int[]--> boxed().collect(Colectiors.toList());
         Arrays.stream(integerArray).collect(Collectors.toList());
-
-        // ADVANTAGES:
-        // - Can apply filter/map logic
-
-        // ISSUES:
-        // - Slight overhead vs simple approaches
         System.out.println("Stream toList(): " + list4);
 
         /* =====================================================
            5. List.of(array)  (Java 9+)
-           RETURN TYPE: Immutable List<T>
+           RETURN TYPE: Immutable List<T> - Cannot add/remove/update  -- Throws UnsupportedOperationException
         ===================================================== */
         List<String> list5 = List.of(stringArray);
-
-        // ADVANTAGES:
-        // - Immutable (safe)
-        // - Very clean syntax
-
-        // ISSUES:
-        // - Cannot add/remove/update  -- Throws UnsupportedOperationException
         System.out.println("List.of(): " + list5);
-
 
         /* =====================================================
            6. Array → Set using HashSet
            RETURN TYPE: Set<T>
+           Removes duplicates
+           Does not guarantee insertion order
         ===================================================== */
         Set<String> set1 = new HashSet<>(Arrays.asList(arr));
-
-        // - Removes duplicates
-        // - Does not Maintains insertion order
         System.out.println("HashSet: " + set1);
 
         /* =====================================================
            7. Array → Set using Stream
            RETURN TYPE: Set<T>
+           Removes duplicates
+           Does not guarantee insertion order
+           No control over Set implementation used like earlier way of getting a Set
         ===================================================== */
         Set<String> set2 = Arrays.stream(arr).collect(Collectors.toSet());
-
-        // - Clean & functional
-        // - Maintains insertion order
-        // - Easy filtering
-        // - No control over Set implementation used like earlier way of getting a Set
         System.out.println("Stream toSet(): " + set2);
-
 
         /* =====================================================
            8. Array → LinkedHashSet
            RETURN TYPE: LinkedHashSet<T>
+           Removes duplicates
+           Maintains insertion order
         ===================================================== */
         Set<String> set3 = new LinkedHashSet<>(Arrays.asList(arr));
-
-        // - Removes duplicates
-        // - Maintains insertion order
-        // - Slightly more memory than HashSet
         System.out.println("LinkedHashSet: " + set3);
-
 
         /* =====================================================
            9. Array → TreeSet (sorted set)
            RETURN TYPE: TreeSet<T>
+           - Removes duplicates
+           - Sorted output
         ===================================================== */
         Set<String> set4 = new TreeSet<>(Arrays.asList(arr));
-
-        // - Removes duplicates
-        // - Sorted output
-        // - Slower than HashSet
         System.out.println("TreeSet: " + set4);
     }
 }
 
 
 
-public class Array1 {
+// 5 types of array in java
+class Array11 {
     public static void main(String[] args) {
 
+        //ways to create an array
+        //#######################################################################
 
-        // NULL can only be store in object array not in primitive array
-
-        // ways to create array
-        int[] intArray0 = new int[4];
-        intArray0[0] = 10;
-        intArray0[1] = 20;
-        intArray0[2] = 30;
-
+        float[] floatArray = new float[4];
+        floatArray[0] = 10f;
+        floatArray[1] = 20.4f;
+        floatArray[2] = 30.0f;
+        System.out.println("Float Array = " + floatArray.toString());
 
         char[] charArray1 = new char[]{'a', 's', 'w', 's', 'k', 'p'};
         System.out.println("Size/capacity = " + charArray1);
         System.out.println("length = " + charArray1.length);
+
         // now size auto taken as 7 ,
         // manually declaring size is now allowed as ,
         // then we can declare size 4 and add 7 elements
         //---either declare or initialise --not both
 
-        int[] ar3 = {1, 4, 23, 5, 76, 13, 64};
+        char[] charArray = {'1','4','v','w','9','p','1'};
+        System.out.println("Char Array = " + charArray.toString());
 
         String ss1 = "shubham shende";
         char[] ar4 = ss1.toCharArray();
         // since string is a is collection of characters we can get collection of characters ie array from a String
+        System.out.println("Char Array = " + charArray.toString());
 
         // not char[5] array = new char[];
         // not char[5] array = new char[5];
+        // yes char[] array = new char[5];
+        // yes char[] array = new char[]{'v','w','9','p'};
 
-    }
-}
 
-// 5 types of array in java
-class Array11 {
-    public static void main(String[] args) {
+        // data types can be stored in an array
+        //#######################################################################
 
-        /* =======================
-           1️⃣ Primitive Arrays
-        ======================= */
+        /*
+           Primitive Arrays
+        */
 
         // stores one character
         // 0 to 65,535  --multilingual and english and symbols special chars
@@ -526,35 +506,6 @@ class Array11 {
     }
 }
 
-class Array2 {
-    public static void main(String[] args) {
-
-        // get min and max integer from int array
-
-        int[] array = {1, 4, 23, 5, 76, 13, 64,23};
-        System.out.println(Arrays.toString(array));
-
-        // method -- 1
-        Arrays.sort(array);
-        System.out.println("min-" + array[0] + " max-" + array[array.length - 1]);
-
-        // method -- 2
-        int minDefault = array[0];
-        for (int currentElement : array) {
-            if (currentElement < minDefault) {
-                minDefault = currentElement;
-            }
-        }
-
-        int maxDefault = array[0];
-        for (int currentElement : array) {
-            if (currentElement > maxDefault)
-                maxDefault = currentElement;
-        }
-
-        System.out.println("min-" + minDefault + " max-" + maxDefault);
-    }
-}
 
 @AllArgsConstructor
 @Data
@@ -760,6 +711,36 @@ public static void main(String[] args) {
                 .toCharArray();
     }
 
+}
+
+class Array2 {
+    public static void main(String[] args) {
+
+        // get min and max integer from int array
+
+        int[] array = {1, 4, 23, 5, 76, 13, 64,23};
+        System.out.println(Arrays.toString(array));
+
+        // method -- 1
+        Arrays.sort(array);
+        System.out.println("min-" + array[0] + " max-" + array[array.length - 1]);
+
+        // method -- 2
+        int minDefault = array[0];
+        for (int currentElement : array) {
+            if (currentElement < minDefault) {
+                minDefault = currentElement;
+            }
+        }
+
+        int maxDefault = array[0];
+        for (int currentElement : array) {
+            if (currentElement > maxDefault)
+                maxDefault = currentElement;
+        }
+
+        System.out.println("min-" + minDefault + " max-" + maxDefault);
+    }
 }
 
 class Array4 {
