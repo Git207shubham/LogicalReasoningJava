@@ -11,58 +11,65 @@ class ArrayMethodsDemo {
 
     public static void main(String[] args) {
 
-
-        /* =========================
-           BASIC ARRAY PROPERTY
-           ========================= */
-
         int[] baseArr = {10, 20, 30};
-
-        // length (NOT a method, it's a variable)
-        // Return type: int
+        // length is NOT a method, it's a variable of type: int
+        // returns number of elements the array contains
         System.out.println("length: " + baseArr.length);
 
 
         /* =========================
-           1. toString()
-           Converts 1D array to readable String
-           Return type: String
+         toString() is an inbuilt method in Arrays class Converts 1D array to readable String
+         and returns that readable String
+        iterates an array and binds all elements using comma and wraps in []
         ========================== */
         int[] arr = {5, 2, 9, 1};
         System.out.println("toString(): " + Arrays.toString(arr));
 
 
         /* =========================
-           2. sort()
-           Sorts array in ascending order
-           Return type: void
+           sort() is an inbuilt method in Arrays class
+           Sorts array in ascending order and returns nothing
+           Works with only primitive arrays (int[], char[], double[] etc.)
+
+         */
         ========================== */
         Arrays.sort(arr);
         System.out.println("sort(): " + Arrays.toString(arr));
 
 
+
         /* =========================
-           3. binarySearch()
-           Searches element in SORTED array only
+           3. binarySearch() is an inbuilt method in Arrays class
+           Searches element and returns index of the element
+           and gaurantees correct result in a sorted array only
+           Breaks array in half and compare the number to middle number
+           then again so iterations arevery leass for 100000 data
+           but should be sorted
            Return type: int (index or negative value)
+
+           For normal search , we need to use for loop and
+           start searching one by one
+           for 10000 , we repeat 10000 times
         ========================== */
         int index = Arrays.binarySearch(arr, 5);
         System.out.println("binarySearch(5): " + index);
 
 
         /* =========================
-           4. equals()
-           Compares content of two arrays
-           Return type: boolean
+          equals() is an inbuilt method in Arrays classs
+          which checks whether exact content of two arrays is same or not
+          For primitive it compares hashcode/reference
+          having Return type: boolean
+         */
         ========================== */
         int[] arr2 = {1, 2, 5, 9};
         System.out.println("equals(): " + Arrays.equals(arr, arr2));
 
 
         /* =========================
-           5. fill()
-           Fills array with given value
-           Return type: void
+           fill() is an inbuilt method in Arrays classs which
+           Fills every index of a given array with given value
+           Modifies the array and returns nothing
         ========================== */
         int[] fillArr = new int[5];
         Arrays.fill(fillArr, 10);
@@ -70,50 +77,93 @@ class ArrayMethodsDemo {
 
 
         /* =========================
-           6. copyOf()
-           Copies array and can resize it
+           copyOf() is an inbuilt method in Arrays classs which
+           creates and returns a new array of provided size
+           and copies all posible elements from the input array to this newly created array  ,
+
+           originalArray, newLength
+
+           if original array length is larger and size we provided is
+           smaller then then create new array by trimming the extra elements
+           same as with larger the fills with default value of datatypes
            Return type: same as array type (int[])
         ========================== */
+
         int[] copyArr = Arrays.copyOf(arr, 6);
         System.out.println("copyOf(): " + Arrays.toString(copyArr));
 
 
         /* =========================
-           7. copyOfRange()
-           Copies specific index range
-           Return type: same as array type (int[])
+           copyOfRange() is an inbuilt method in Arrays classs which
+           creates and returns a new array of size as per index range provided
+           is used to copy a specific portion (range) of an array into a new array
+
+         Arrays.copyOfRange(originalArray, from, to);
+         -- from-inclusive --to excluded
         ========================== */
         int[] rangeArr = Arrays.copyOfRange(arr, 1, 3);
         System.out.println("copyOfRange(): " + Arrays.toString(rangeArr));
 
 
         /* =========================
-           8. asList()
-           Converts array to fixed-size List
-           Return type: List<T>
+           stream() is an inbuilt method in Arrays class
+           which Converts array to Stream as per the datatype of the array elements
+           Return type: IntStream (for int[]) , stream of ints
+           then we can run aggregate functions on it and other java 8 features on it
         ========================== */
-        String[] names = {"Amit", "Rohit", "Virat"};
-        List<String> nameList = Arrays.asList(names);
-        System.out.println("asList(): " + nameList);
+        int[] intArray = {5, 2, 9, 1};
+        IntStream stream = Arrays.stream(intArray);
 
-
-        /* =========================
-           9. stream()
-           Converts array to Stream
-           Return type: IntStream (for int[])
-        ========================== */
-        IntStream stream = Arrays.stream(arr);
         int sum = stream.sum();
         System.out.println("stream().sum(): " + sum);
 
+        double[] doubleArray = {1.5, 2.7, 3.14};
+        DoubleStream doubleStream = Arrays.stream(doubleArray);
+
+        long[] longArray = {100L, 200L, 300L};
+        LongStream longStream = Arrays.stream(longArray);
+
+        // for remaining primitive no inbuilt method provided
+        String[] stringArray = {"apple", "banana", "cherry"};
+        Stream<String> stringStream = Arrays.stream(stringArray);
+
+        Stream<User> userStream , Stream<String> stringStream
+
+        Integer[] boxedIntArray = {5, 2, 9, 1};
+        Stream<Integer> boxedIntStream = Arrays.stream(boxedIntArray);
+
         Integer[] integerArray = {3,5,7,9};
-        int sum2 = Arrays.stream(integerArray).mapToInt(Integer::intValue).sum();
+
+        // applies to every non-primitive datatype
+        int sum2 = Arrays.stream(integerArray)   // Stream<Integer>
+                    .mapToInt(Integer::intValue)  // IntStream
+                    .sum();
         System.out.println(Arrays.toString(integerArray)+"stream().sum(): " + sum2);
 
+        // toArray -- converts a  stream to an Array of Objects
+        int[] arr3 = list.stream()
+                        .mapToInt(Integer::intValue) // Stream<Integer>
+                        .toArray();
+        Object[] arr1 = list.stream().toArray();
+
+        // toArray -- converts a  stream to an Array of given datatype
+        Integer[] arr2 = list.stream()
+                        .toArray(Integer[]::new);
+
+        int[] intArray = {5, 2, 9, 1};
+        Stream<Integer> boxedStream = Arrays.stream(intArray)
+                                            .boxed();
+
+        int[] intArray = {5, 2, 9, 1};
+        Integer[] boxedArray = Arrays.stream(intArray)
+                                .boxed()                    // Stream<Integer>
+                                .toArray(Integer[]::new);  //
+
         /* =========================
-           10. setAll()
-           Sets values using index-based logic
-           Return type: void
+           setAll() is an inbuilt method in Arrays class with return type void
+           which Resets values in the array using index-based logic
+           for every index in the array,
+           calculate a new value using that index only and put the result at that index.
         ========================== */
         int[] logicArr = new int[5];
         logicArr[0]=12;
@@ -123,18 +173,23 @@ class ArrayMethodsDemo {
         Arrays.setAll(logicArr, i -> i * 10);
         System.out.println("setAll(): " + Arrays.toString(logicArr));
 
-        List<Integer> result = Arrays.stream(logicArr).map(element -> element*5).boxed().collect(Collectors.toList());
+        //Stream<Integer> stream1 , and i have applied strem() on List<Integer>
+
+        //If we want to modify the array and do some operation using values then use Stream
+        //and use toArray / collect as per the return object required
+        List<Integer> result = Arrays.stream(logicArr) // we got IntStream now , stream , now we can do any operation
+                                    .map(element -> element*5)
+                                    .collect(Collectors.toList());
+
+
 
         //List<Integer> result2 = Arrays.stream(logicArr).map(element -> element*5).boxed().toList();
-
         System.out.println("setAll(): " + result);
 
 
-
         /* =========================
-           11. parallelSort()
-           Multi-threaded sorting
-           Return type: void
+           parallelSort() is an inbuilt method in Arrays class with return type void
+           which does Multi-threaded sorting not really needed for small arrays
         ========================== */
         int[] bigArr = {9, 3, 7, 1, 6};
         Arrays.parallelSort(bigArr);
@@ -142,9 +197,13 @@ class ArrayMethodsDemo {
 
 
         /* =========================
-           12. parallelPrefix()
-           Cumulative operation
+           parallelPrefix() is an inbuilt method in Arrays
+           ReBuilds the array with cumulative results
+           as per the lambda expression we have provided
            Return type: void
+           (x, y) -> x + y mean?
+           This is a lambda that tells Java how to combine the values
+           It means each position contains the result accumulated so far
         ========================== */
         int[] prefixArr = {1, 2, 3, 4};
         Arrays.parallelPrefix(prefixArr, (x, y) -> x + y);
@@ -152,18 +211,58 @@ class ArrayMethodsDemo {
 
 
         /* =========================
-           13. clone()
-           Creates shallow copy of array
+           clone()
+           Creates shallow copy of array of primitive datatypes automatically create a
+           deep copy because primitive types hold raw values
+         */
            Return type: same as array type (int[])
         ========================== */
         int[] clonedArr = arr.clone();
         System.out.println("clone(): " + Arrays.toString(clonedArr));
+        //Because int is a primitive type, the values themselves are copied
+        //So practically, you can think of this as a completely independent copy
+        //Changing one doesn't affect the other because they are totally seperate elements
+        clonedArr[0] = 99;
+        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(clonedArr));
+        [10, 20, 30]
+        [99, 20, 30]
 
+        Person[] arr = new Person[2];
+        arr[0] = new Person("John");
+        arr[1] = new Person("Mike");
+        Person[] clonedArr = arr.clone();
+
+        arr
+     ↓
+    [ reference A | reference B ]
+       ↓             ↓
+        John           Mike
+
+
+        clonedArr
+    ↓
+    [ reference A | reference B ]
+       ↓             ↓
+        John           Mike
+
+        Notice that both arrays contain references pointing to the same Person objects.
+
+        That's called a shallow copy.
+
+        Deep copy
+        Changing the object through one array
+        doesn't change the corresponding object in the other array
+
+        Person[] original = { new Person("Alice"), new Person("Bob") };
+
+        // Using Java 8 Streams
+        Person[] deepCopy = Arrays.stream(original)
+                .map(Person::new)
+                .toArray(Person[]::new);
 
         /* =========================
-           14. deepToString()
-           Prints multi-dimensional arrays
-           Return type: String
+           deepToString() converts and returns a multi-dimensional arrays as a String
         ========================== */
         int[][] matrix = {{1, 2}, {3, 4,5,6,7}};
         System.out.println("deepToString(): " + Arrays.deepToString(matrix));
@@ -172,13 +271,12 @@ class ArrayMethodsDemo {
         System.out.println(matrix[1].length);
 
         /* =========================
-           15. deepEquals()
-           Compares multi-dimensional arrays
-           Return type: boolean
+           deepEquals()
+           Compares two multi-dimensional arrays
+           and returns a boolean value
         ========================== */
         int[][] matrix2 = {{1, 2}, {3, 4}};
         System.out.println("deepEquals(): " + Arrays.deepEquals(matrix, matrix2));
-
 
         convertArrayToListAndSet();
     }
@@ -186,13 +284,20 @@ class ArrayMethodsDemo {
 
     public static void convertArrayToListAndSet() {
 
-        String[] arr = {"A", "B", "C", "A"};
+        String[] stringArray = {"A", "B", "C", "A"};
 
         /* =====================================================
            1. Arrays.asList(array)
            RETURN TYPE: List<T>
+           fixed-size List of same datatype as of the input array
+           Its not an Arraylist or any other , its special list
+           Only works with Non-primitive , Wrapper , Custom objects
         ===================================================== */
-        List<String> list1 = Arrays.asList(arr);
+        List<String> list1 = Arrays.asList(stringArray);
+
+        String[] names = {"Amit", "Rohit", "Virat"};
+        List<String> nameList = Arrays.asList(names);
+        System.out.println("asList(): " + nameList);
 
         // ADVANTAGES:
         // - Simple and fast
@@ -200,8 +305,6 @@ class ArrayMethodsDemo {
 
         // ISSUES:
         // - Fixed size list (add/remove throws exception)
-        // - Not a real ArrayList
-
         // list1.add("D"); // ❌ UnsupportedOperationException
         System.out.println("Arrays.asList(): " + list1);
 
@@ -210,7 +313,7 @@ class ArrayMethodsDemo {
            2. new ArrayList<>(Arrays.asList(array))
            RETURN TYPE: ArrayList<T>
         ===================================================== */
-        List<String> list2 = new ArrayList<>(Arrays.asList(arr));
+        List<String> list2 = new ArrayList<>(Arrays.asList(stringArray));
 
         // ADVANTAGES:
         // - Fully modifiable list
@@ -244,33 +347,31 @@ class ArrayMethodsDemo {
            4. Stream API → List
            RETURN TYPE: List<T>
         ===================================================== */
-        List<String> list4 = Arrays.stream(arr).collect(Collectors.toList());
+        List<String> list4 = Arrays.stream(stringArray).
+                collect(Collectors.toList());
+
+        int[]--> boxed().colleact(Colectiors.toList());
+        Arrays.stream(integerArray).collect(Collectors.toList());
 
         // ADVANTAGES:
-        // - Very powerful
         // - Can apply filter/map logic
 
         // ISSUES:
         // - Slight overhead vs simple approaches
-
         System.out.println("Stream toList(): " + list4);
-
 
         /* =====================================================
            5. List.of(array)  (Java 9+)
            RETURN TYPE: Immutable List<T>
         ===================================================== */
-        List<String> list5 = List.of(arr);
+        List<String> list5 = List.of(stringArray);
 
         // ADVANTAGES:
         // - Immutable (safe)
         // - Very clean syntax
 
         // ISSUES:
-        // - Cannot add/remove/update
-        // - Throws UnsupportedOperationException
-
-        // list5.add("D"); // ❌ Exception
+        // - Cannot add/remove/update  -- Throws UnsupportedOperationException
         System.out.println("List.of(): " + list5);
 
 
@@ -280,15 +381,9 @@ class ArrayMethodsDemo {
         ===================================================== */
         Set<String> set1 = new HashSet<>(Arrays.asList(arr));
 
-        // ADVANTAGES:
-        // - Removes duplicates automatically
-        // - Fast operations
-
-        // ISSUES:
-        // - No insertion order maintained
-
+        // - Removes duplicates
+        // - Does not Maintains insertion order
         System.out.println("HashSet: " + set1);
-
 
         /* =====================================================
            7. Array → Set using Stream
@@ -296,29 +391,22 @@ class ArrayMethodsDemo {
         ===================================================== */
         Set<String> set2 = Arrays.stream(arr).collect(Collectors.toSet());
 
-        // ADVANTAGES:
         // - Clean & functional
+        // - Maintains insertion order
         // - Easy filtering
-
-        // ISSUES:
-        // - No control over Set implementation
-
+        // - No control over Set implementation used like earlier way of getting a Set
         System.out.println("Stream toSet(): " + set2);
 
 
         /* =====================================================
-           8. Array → LinkedHashSet (maintains order)
+           8. Array → LinkedHashSet
            RETURN TYPE: LinkedHashSet<T>
         ===================================================== */
         Set<String> set3 = new LinkedHashSet<>(Arrays.asList(arr));
 
-        // ADVANTAGES:
         // - Removes duplicates
         // - Maintains insertion order
-
-        // ISSUES:
         // - Slightly more memory than HashSet
-
         System.out.println("LinkedHashSet: " + set3);
 
 
@@ -328,25 +416,10 @@ class ArrayMethodsDemo {
         ===================================================== */
         Set<String> set4 = new TreeSet<>(Arrays.asList(arr));
 
-        // ADVANTAGES:
+        // - Removes duplicates
         // - Sorted output
-        // - No duplicates
-
-        // ISSUES:
         // - Slower than HashSet
-
         System.out.println("TreeSet: " + set4);
-    }
-}
-@AllArgsConstructor
-@Data
-class Student implements Comparable<Student>{
-    int id;
-    String name;
-
-    @Override
-    public int compareTo(Student other) {
-        return Integer.compare(this.id, other.id); // ascending order by id
     }
 }
 
@@ -354,6 +427,7 @@ class Student implements Comparable<Student>{
 
 public class Array1 {
     public static void main(String[] args) {
+
 
         // NULL can only be store in object array not in primitive array
 
@@ -373,9 +447,10 @@ public class Array1 {
         //---either declare or initialise --not both
 
         int[] ar3 = {1, 4, 23, 5, 76, 13, 64};
+
         String ss1 = "shubham shende";
         char[] ar4 = ss1.toCharArray();
-        // since is collection of characters we can get collection of characters ie array from a String
+        // since string is a is collection of characters we can get collection of characters ie array from a String
 
         // not char[5] array = new char[];
         // not char[5] array = new char[5];
@@ -383,40 +458,50 @@ public class Array1 {
     }
 }
 
+// 5 types of array in java
 class Array11 {
     public static void main(String[] args) {
 
         /* =======================
            1️⃣ Primitive Arrays
         ======================= */
-        //Arrays.toString(byteArray)
-        // its just a java utility method to human readable string format
-        // iterates an array and binds all elements using comma and wraps in []
 
+        // stores one character
+        // 0 to 65,535  --multilingual and english and symbols special chars
+        char[] charArray = {'a', 'b'};
+        System.out.println("charArray = " + Arrays.toString(charArray));
+
+        // small whole number  -128 to 127
+        byte[] byteArray = {1, 2};
+        System.out.println("byteArray = " + Arrays.toString(byteArray));
+
+        // big whole number -32,768 to 32,767
+        short[] shortArray = {10};
+        System.out.println("shortArray = " + Arrays.toString(shortArray));
+
+        // large whole number -2,147,483,648 2,147,483,647
+        // −214.75 crore
         int[] intArray = {1, 4, 23, 5, 76, 13, 64};
         String stringFromArray  = Arrays.toString(intArray);
         System.out.println("intArray = " + stringFromArray);
 
-        double[] doubleArray = {1.1, 2.2};
-        System.out.println("doubleArray = " + Arrays.toString(doubleArray));
-
-        long[] longArray = {100L};
-        System.out.println("longArray = " + Arrays.toString(longArray));
-
+        // explicitly f is needed , otherwise it will be assumed as Double
+        // −3.4 × 10³⁸
         float[] floatArray = {1.2f};
         System.out.println("floatArray = " + Arrays.toString(floatArray));
 
+        double[] doubleArray = {1.1, 2.2};
+        // d is not needed
+        // −1.8 × 10³⁰⁸
+        System.out.println("doubleArray = " + Arrays.toString(doubleArray));
+
+        // −9.22 × 10¹⁸
+        // ading L is needed
+        long[] longArray = {100L};
+        System.out.println("longArray = " + Arrays.toString(longArray));
+
         boolean[] booleanArray = {true, false};
         System.out.println("booleanArray = " + Arrays.toString(booleanArray));
-
-        byte[] byteArray = {1, 2};
-        System.out.println("byteArray = " + Arrays.toString(byteArray));
-
-        short[] shortArray = {10};
-        System.out.println("shortArray = " + Arrays.toString(shortArray));
-
-        char[] charArray = {'a', 'b'};
-        System.out.println("charArray = " + Arrays.toString(charArray));
 
         /* =======================
            2️⃣ String Array ie Non-primitive array
@@ -467,11 +552,11 @@ class Array2 {
         int[] array = {1, 4, 23, 5, 76, 13, 64,23};
         System.out.println(Arrays.toString(array));
 
-        // method --1
+        // method -- 1
         Arrays.sort(array);
         System.out.println("min-" + array[0] + " max-" + array[array.length - 1]);
 
-        // method --2
+        // method -- 2
         int minDefault = array[0];
         for (int currentElement : array) {
             if (currentElement < minDefault) {
@@ -489,27 +574,35 @@ class Array2 {
     }
 }
 
-// sorting and reversing array
-class Array3 {
-    public static void main(String[] args) {
+@AllArgsConstructor
+@Data
+class Student implements Comparable<Student>{
+    int id;
+    String name;
 
-        // reverse the existing array of int/ string /char
+    @Override
+    public int compareTo(Student other) {
+        return Integer.compare(this.id, other.id); // ascending order by id
+    }
+}
+
+//sorting and reversing array
+class Array3 {
+public static void main(String[] args) {
+
+        // reverse the existing array of int/string/char
         int[] intArray = {1, 2, 3, 4, 5};
         reverseIntArray(intArray);
         System.out.println(Arrays.toString(intArray));
 
-        // soring the array
+        // sorting the array
         Arrays.sort(intArray);
         System.out.println(Arrays.toString(intArray));
-        // Modifies the original array and returns nothing
-        // Works with primitive arrays (int[], char[], double[] etc.)
         // java provide special mechanism for primitive arrays to use Arrays.sort(int Array);
-        // No objects involved → no boxing/unboxing
 
-        //Can be used with Objects and Custom Comparable objects and Wrappers and String
-        // Sorts in ascending order
-        // Custom Comparable objects as per inbuilt compareTo method implemented in the class
-        // need to modify existing class to implement Comparable interface
+        //Can be used with Objects and Custom Comparable objects and Wrappers ie Integer and String
+        //Custom Comparable objects as per inbuilt compareTo method implemented in the class
+        //but for this we need to modify existing class to implement Comparable interface
 
 
         // to reverse an array
@@ -519,13 +612,12 @@ class Array3 {
         // that uses compareTo() method of Comparable interface internally
         //Arrays.sort(intArray, Collections.reverseOrder());
 
-        // need compareTo() method implementation and specify which field/variable to be compared
 
-        //public int compareTo(Employee other) { return Integer.compare(this.id, other.id);}
-        // Arrays.sort(studentArray, Collections.reverseOrder());
+        // need compareTo() method implementation  in the class and specify which field/variable to be compared
 
         //Use of Comparator to sort as per out need
-        // Need to always provide a Comparator for sorting explicitly while calling sort
+        //Need to always provide a Comparator for sorting explicitly while calling sort
+
 
         Student[] studentArray = new Student[] {
                 new Student(3, "Ravi"),
@@ -533,11 +625,14 @@ class Array3 {
                 new Student(2, "Neha")
         };
 
-        // works with only comparable objects
+
+        //works with only comparable objects
         Arrays.sort(studentArray);
         Arrays.sort(studentArray,Collections.reverseOrder());
 
-        // Anonymous Comparator (Old but valid)
+
+        //Anonymous Comparator (Old but valid)
+        // semicolon and curly braces needed with return statement
         Arrays.sort(studentArray, new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {
@@ -553,12 +648,13 @@ class Array3 {
         Arrays.sort(studentArray, (e1, e2) -> e1.id - e2.id);
         //Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id).reversed());
         Arrays.sort(studentArray,Comparator.comparingInt((Student s) -> s.id).reversed());
+
         Arrays.sort(
                 studentArray,
                 Comparator.comparingInt(Student::getId).reversed()
         );
 
-        // multilevel sorting
+        //multilevel sorting
         Arrays.sort(
                 studentArray,
                 Comparator.comparingInt(Student::getId)
@@ -578,6 +674,8 @@ class Array3 {
         String[] stringArray1 =reverseStringArrayJava8(stringArray);
         System.out.println(Arrays.toString(stringArray)+" : "+Arrays.toString(stringArray1));
 
+
+
         //Collections.reverse(collectionObject)
         //✔ Works in-place for object arrays
         //❌ Not for primitive arrays (int[], char[])
@@ -587,8 +685,9 @@ class Array3 {
         List<String> listString2 = Arrays.asList(stringArray);
         Collections.sort(listString2);
         System.out.println("bbbb "+Arrays.toString(stringArray)+" : "+listString2);
+
         Collections.reverse(listString2);
-        // same array is reversed and list as well
+        // same array ? is reversed and list as well
         System.out.println("cc "+Arrays.toString(stringArray)+" : "+listString2);
 
         List<String> listString3 = new ArrayList<>(Arrays.asList(stringArray));
@@ -599,7 +698,8 @@ class Array3 {
         char[] charArray = new char[]{'f','s','w','s','k','p'};
         System.out.println(Arrays.toString(charArray));
         // becoz for primitive array is stored as one list element
-           List<char[]> listChar = Arrays.asList(charArray);
+
+        List<char[]> listChar = Arrays.asList(charArray);
         Collections.reverse(listChar);
         System.out.println(Arrays.toString(charArray) + " : " + listChar);
 
@@ -611,8 +711,10 @@ class Array3 {
 
     }
 
+    // reverse any array -- primitive , non-primitive , object
     public static void reverseIntArray(int[] arr) {
-           int startIndex = 0;
+
+        int startIndex = 0;
         int endIndex = arr.length - 1;
 
         System.out.println("Original : "+Arrays.toString(arr));
@@ -651,30 +753,14 @@ class Array3 {
         System.out.println("Reversed : "+Arrays.toString(arr));
     }
 
-
+    //later
     public static String[] reverseStringArrayJava8(String[] arr) {
         return IntStream.range(0, arr.length)
                 .mapToObj(i -> arr[arr.length - 1 - i])
                 .toArray(String[]::new);
     }
 
-    public static char[] reverseCharArray(char[] arr) {
-        int startIndex = 0;
-        int endIndex = arr.length - 1;
-
-        System.out.println("Original : " + Arrays.toString(arr));
-
-        while (startIndex < endIndex) {
-            char temp = arr[startIndex];
-            arr[startIndex] = arr[endIndex];
-            arr[endIndex] = temp;
-
-            startIndex++;
-            endIndex--;
-
-        }
-        return arr;
-    }
+    //later
     public static char[] reverseCharArrayJava8(char[] arr) {
         return IntStream.range(0, arr.length)
                 .map(i -> arr[arr.length - 1 - i])
@@ -692,21 +778,25 @@ class Array4 {
 
         // Kth smallest and Kth larget ---first sort then get array[n-1] and array[0]
         Integer[] array = {1, 4, 23, 5, 76, 13, 64};
-        Arrays.sort(array);
+        Arrays.sort(array);   // works for primitive and non-primitive
         System.out.println(Arrays.toString(array));
+
         Arrays.sort(array, Comparator.reverseOrder());
+        //  Arrays.sort(array, Comparator.reverseOrder());  -- if primitive then  Arrays.sort,Collections.reverseOrder());
         System.out.println(Arrays.toString(array));
 
         String[] array1 = {"cc", "aa", "ww", "ff"};
         Arrays.sort(array1, Comparator.reverseOrder());
         System.out.println(Arrays.toString(array1));
 
+        // even if it was int array --then also auto boxing
         for (Integer i : array) {
             System.out.print(i + " ");
         }
 
         secondHighest();
         secondLowest();
+
     }
 
     public static void secondHighest()
@@ -714,6 +804,7 @@ class Array4 {
         int[] arr = {10, 5, 20, 8, 20, 3};
         int first = Integer.MIN_VALUE;
         int second = Integer.MIN_VALUE;
+
         for (int n : arr) {
             if (n > first) {       // new maximum found
                 second = first;
@@ -722,6 +813,7 @@ class Array4 {
                 second = n;
             }
         }
+
         if (second == Integer.MIN_VALUE) {
             System.out.println("No second highest element exists.");
         } else {
@@ -758,27 +850,27 @@ class Array41 {
 
         int[] intArray = {1, 4, 22, 14, 19, 9, 5, 7, 22, 0};
         IntStream.of(intArray).distinct().toArray();
+        // toArray() aplied on primitive Stream ie int, long, double gives primitive array ,
+        // if applied on non-primitive stream without implementation then returns object array
+        // if applied on Collections then returns as per the Implementation
 
         Integer[] numbers = {1, 2, 2, 3, 1};
         LinkedHashSet<Integer> set = new LinkedHashSet<>(Arrays.asList(numbers));
         Integer[] uniqueNumbers = set.toArray(new Integer[0]);
 
-        String[] names = {"Amit", "Ravi", "Amit", "Neha", "Ravi"};
-        Set<String> set2 = new LinkedHashSet<>(Arrays.asList(names));
-        String[] uniqueNames = set2.toArray(new String[0]);
-
-        String[] namesString = {"Amit", "Ravi", "Amit", "Neha", "Ravi"};
-        String[] uniqueNamesStringArray = new LinkedHashSet<>(Arrays.asList(namesString))
+        String[] namesStringArray = {"Amit", "Ravi", "Amit", "Neha", "Ravi"};
+        String[] uniqueNamesStringArray
+                = new LinkedHashSet<>(Arrays.asList(namesStringArray))
                 .toArray(new String[0]);
 
-        System.out.println(Arrays.toString(uniqueNames));
+        System.out.println(Arrays.toString(uniqueNamesStringArray));
 
         // For Strings
-        String[] uniqueNamesStream = Arrays.stream(names)
+        String[] uniqueNamesStream = Arrays.stream(namesStringArray)
                 .distinct()
                 .toArray(String[]::new);
 
-// For Integers
+        // For Integers
         Integer[] uniqueNumbersStream = Arrays.stream(numbers)
                 .distinct()
                 .toArray(Integer[]::new);
@@ -789,11 +881,14 @@ class Array41 {
                 new Student(1, "Amit"),
                 new Student(3, "Neha")
         };
+
         Student[] uniqueStudentsStream = Arrays.stream(students)
-                .distinct()
+                .distinct()   // distinct hash
                 .toArray(Student[]::new);
 
+
         int[] nums = {1, 2, 2, 3, 1};
+
         int[] uniqueNums = Arrays.stream(nums)
                 .distinct()
                 .toArray();
@@ -801,6 +896,8 @@ class Array41 {
 
         int[] numsX = {1, 2, 2, 3, 1};
         Integer[] numsBoxedX = Arrays.stream(numsX).boxed().toArray(Integer[]::new);
+
+        // duplicate removed
         Integer[] uniqueNumsX = new LinkedHashSet<>(Arrays.asList(numsBoxedX))
                 .toArray(new Integer[0]);
         System.out.println(Arrays.toString(uniqueNumsX));
@@ -811,11 +908,12 @@ class Array41 {
 class Array42 {
     public static void main(String[] args) {
 
+        duplicatesInArray();
+
         // to count how many time int, char, String , Integer occured
         withoutArrayCollectionObject();
         withCollectionObject();
 
-        duplicatesInArray();
     }
 
     public static void duplicatesInArray()
