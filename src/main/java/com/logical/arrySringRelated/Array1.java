@@ -35,7 +35,7 @@ class ArrayMethodsDemo {
         ========================== */
         Arrays.sort(arr);
         System.out.println("sort(): " + Arrays.toString(arr));
-
+        //line : 577
 
 
         /* =========================
@@ -586,6 +586,7 @@ class Student implements Comparable<Student>{
     }
 }
 
+
 //sorting and reversing array
 class Array3 {
 public static void main(String[] args) {
@@ -595,28 +596,37 @@ public static void main(String[] args) {
         reverseIntArray(intArray);
         System.out.println(Arrays.toString(intArray));
 
-        // sorting the array
         Arrays.sort(intArray);
         System.out.println(Arrays.toString(intArray));
-        // java provide special mechanism for primitive arrays to use Arrays.sort(int Array);
 
-        //Can be used with Objects and Custom Comparable objects and Wrappers ie Integer and String
-        //Custom Comparable objects as per inbuilt compareTo method implemented in the class
-        //but for this we need to modify existing class to implement Comparable interface
+        Integer[] arr = {5, 2, 8, 1, 3};
+        Integer[] sorted = Arrays.stream(arr).sorted().toArray(Integer[]::new);
+        System.out.println(Arrays.toString(sorted));
 
+        /*
+           Can be used with
+           Primitive datatype
+           Objects
+           Custom Comparable objects as per inbuilt compareTo method implemented in the class we need to modify existing class to implement Comparable interface
+           Wrappers ie Integer
+           String
+         */
 
-        // to reverse an array
-        // reverse  -- Collections.reverseOrder()
-        // Works with Custom Comparable objects and Objects and Wrappers and String as they are Comparable
-        // above works becoz Collections.reverseOrder() returns Comparator
-        // that uses compareTo() method of Comparable interface internally
-        //Arrays.sort(intArray, Collections.reverseOrder());
+        Integer[] arr = {5, 2, 8, 1, 3};
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
 
+         /*
+            use of Comparator to sort
+            to reverse an array
+            Custom Comparable objects as per inbuilt compareTo method implemented in the class we need to modify existing class to implement Comparable interface
+            Wrappers ie Integer
+            String
+         */
 
-        // need compareTo() method implementation  in the class and specify which field/variable to be compared
-
-        //Use of Comparator to sort as per out need
-        //Need to always provide a Comparator for sorting explicitly while calling sort
+        Integer[] arr = {5, 2, 8, 1, 3};
+        Arrays.sort(arr, Collections.reverseOrder());
+        System.out.println(Arrays.toString(arr));
 
 
         Student[] studentArray = new Student[] {
@@ -628,11 +638,13 @@ public static void main(String[] args) {
 
         //works with only comparable objects
         Arrays.sort(studentArray);
+
+        // Collections.reverseOrder() → reverses the natural Comparable order if it exists
         Arrays.sort(studentArray,Collections.reverseOrder());
 
 
         //Anonymous Comparator (Old but valid)
-        // semicolon and curly braces needed with return statement
+        //Semicolon and curly braces needed with return statement
         Arrays.sort(studentArray, new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {
@@ -644,9 +656,7 @@ public static void main(String[] args) {
         Arrays.sort(studentArray, (e1, e2) -> Integer.compare(e1.id, e2.id));
         Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id));
         Arrays.sort(studentArray, Comparator.comparingInt(Student::getId));
-
-        Arrays.sort(studentArray, (e1, e2) -> e1.id - e2.id);
-        //Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id).reversed());
+        Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id).reversed());
         Arrays.sort(studentArray,Comparator.comparingInt((Student s) -> s.id).reversed());
 
         Arrays.sort(
@@ -677,7 +687,7 @@ public static void main(String[] args) {
 
 
         //Collections.reverse(collectionObject)
-        //✔ Works in-place for object arrays
+        //✔ Works in-place for object arrays  -- String, Wrapper , Custom Objects
         //❌ Not for primitive arrays (int[], char[])
         // becoz for primitive array is stored as one list element
         // ie one Object , Non-primitive array's elements are stored as separate elements in list
@@ -710,6 +720,7 @@ public static void main(String[] args) {
         System.out.println(Arrays.toString(charArray2) + " : " + listChar);
 
     }
+
 
     // reverse any array -- primitive , non-primitive , object
     public static void reverseIntArray(int[] arr) {
