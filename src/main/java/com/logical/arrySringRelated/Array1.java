@@ -28,9 +28,7 @@ class ArrayMethodsDemo {
 
         /* =========================
            sort() is an inbuilt method in Arrays class
-           Sorts array in ascending order and returns nothing
-           Works with only primitive arrays (int[], char[], double[] etc.)
-
+           Sorts primitive , Sting , Wrapper , Custom Comparable arrrays
          */
         ========================== */
         Arrays.sort(arr);
@@ -58,8 +56,8 @@ class ArrayMethodsDemo {
         /* =========================
           equals() is an inbuilt method in Arrays classs
           which checks whether exact content of two arrays is same or not
-          For primitive it compares hashcode/reference
-          having Return type: boolean
+          For non-primitive it compares hashcode/reference
+          returns boolean value
          */
         ========================== */
         int[] arr2 = {1, 2, 5, 9};
@@ -71,8 +69,8 @@ class ArrayMethodsDemo {
            Fills every index of a given array with given value
            Modifies the array and returns nothing
         ========================== */
-        int[] fillArr = new int[5];
-        Arrays.fill(fillArr, 10);
+        int[] charArray = new char[5];
+        Arrays.fill(fillArr, '8');
         System.out.println("fill(): " + Arrays.toString(fillArr));
 
 
@@ -122,17 +120,16 @@ class ArrayMethodsDemo {
 
         long[] longArray = {100L, 200L, 300L};
         LongStream longStream = Arrays.stream(longArray);
-
         // for remaining primitive no inbuilt method provided
+
+        // Stream of String , Wrapper , Custom Objects
         String[] stringArray = {"apple", "banana", "cherry"};
         Stream<String> stringStream = Arrays.stream(stringArray);
 
-        Stream<User> userStream , Stream<String> stringStream
-
-        Integer[] boxedIntArray = {5, 2, 9, 1};
+        Integer[] boxedIntArray,integerArray = {5, 2, 9, 1};
         Stream<Integer> boxedIntStream = Arrays.stream(boxedIntArray);
 
-        Integer[] integerArray = {3,5,7,9};
+        Stream<User> userStream = Arrays.stream(userArray):
 
         // applies to every non-primitive datatype
         int sum2 = Arrays.stream(integerArray)   // Stream<Integer>
@@ -140,13 +137,15 @@ class ArrayMethodsDemo {
                     .sum();
         System.out.println(Arrays.toString(integerArray)+"stream().sum(): " + sum2);
 
+
         // toArray -- converts a  stream to an Array of Objects
         int[] arr3 = list.stream()
                         .mapToInt(Integer::intValue) // Stream<Integer>
                         .toArray();
         Object[] arr1 = list.stream().toArray();
 
-        // toArray -- converts a  stream to an Array of given datatype
+
+        // toArray -- converts a  List to an Array of given datatype by converting to stream first
         Integer[] arr2 = list.stream()
                         .toArray(Integer[]::new);
 
@@ -156,8 +155,8 @@ class ArrayMethodsDemo {
 
         int[] intArray = {5, 2, 9, 1};
         Integer[] boxedArray = Arrays.stream(intArray)
-                                .boxed()                    // Stream<Integer>
-                                .toArray(Integer[]::new);  //
+                                .boxed()
+                                .toArray(Integer[]::new);
 
         /* =========================
            setAll() is an inbuilt method in Arrays class with return type void
@@ -165,10 +164,10 @@ class ArrayMethodsDemo {
            for every index in the array,
            calculate a new value using that index only and put the result at that index.
         ========================== */
-        int[] logicArr = new int[5];
-        logicArr[0]=12;
-        logicArr[1]=10;
-        logicArr[2]=8;
+        long[] longArray = new long[5];
+        logicArr[0]=12L;
+        logicArr[1]=10L;
+        logicArr[2]=8L;
 
         Arrays.setAll(logicArr, i -> i * 10);
         System.out.println("setAll(): " + Arrays.toString(logicArr));
@@ -177,14 +176,15 @@ class ArrayMethodsDemo {
 
         //If we want to modify the array and do some operation using values then use Stream
         //and use toArray / collect as per the return object required
-        List<Integer> result = Arrays.stream(logicArr) // we got IntStream now , stream , now we can do any operation
-                                    .map(element -> element*5)
-                                    .collect(Collectors.toList());
 
+        List<Long> result = Arrays.stream(longArray) // we got LongStream now , stream , now we can do any operation
+                .map(element -> element * 5)
+                .boxed()                             // we got Stream<Long>
+                .collect(Collectors.toList());
 
-
-        //List<Integer> result2 = Arrays.stream(logicArr).map(element -> element*5).boxed().toList();
-        System.out.println("setAll(): " + result);
+        long[] result = Arrays.stream(longArray)
+                .map(element -> element * 5)
+                .toArray();
 
 
         /* =========================
@@ -228,37 +228,22 @@ class ArrayMethodsDemo {
         [10, 20, 30]
         [99, 20, 30]
 
-        Person[] arr = new Person[2];
+        Person[] originalPersonArray = new Person[2];
         arr[0] = new Person("John");
         arr[1] = new Person("Mike");
-        Person[] clonedArr = arr.clone();
-
-        arr
-     ↓
-    [ reference A | reference B ]
-       ↓             ↓
-        John           Mike
-
-
-        clonedArr
-    ↓
-    [ reference A | reference B ]
-       ↓             ↓
-        John           Mike
+        Person[] clonedPersonArray = originalPersonArray.clone();
 
         Notice that both arrays contain references pointing to the same Person objects.
-
         That's called a shallow copy.
 
         Deep copy
         Changing the object through one array
         doesn't change the corresponding object in the other array
 
-        Person[] original = { new Person("Alice"), new Person("Bob") };
 
         // Using Java 8 Streams
-        Person[] deepCopy = Arrays.stream(original)
-                .map(Person::new)
+        Person[] deepCopy = Arrays.stream(originalPersonArray)
+                .map(Person::new)       // maps data to new object
                 .toArray(Person[]::new);
 
         /* =========================
@@ -278,11 +263,8 @@ class ArrayMethodsDemo {
         int[][] matrix2 = {{1, 2}, {3, 4}};
         System.out.println("deepEquals(): " + Arrays.deepEquals(matrix, matrix2));
 
-        convertArrayToListAndSet();
-    }
 
-
-    public static void convertArrayToListAndSet() {
+        //convertArrayToListAndSet();
 
         String[] stringArray = {"A", "B", "C", "A"};
 
@@ -591,7 +573,7 @@ class Student implements Comparable<Student>{
 class Array3 {
 public static void main(String[] args) {
 
-        // reverse the existing array of int/string/char
+        // reverse the existing array of int/string/char  -- manual way only , no shortcut
         int[] intArray = {1, 2, 3, 4, 5};
         reverseIntArray(intArray);
         System.out.println(Arrays.toString(intArray));
@@ -651,20 +633,23 @@ public static void main(String[] args) {
                 return Integer.compare(s1.id, s2.id);
             }
         });
-
         Arrays.sort(studentArray, (e1, e2) -> e1.id - e2.id);
         Arrays.sort(studentArray, (e1, e2) -> Integer.compare(e1.id, e2.id));
+
+
         Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id));
         Arrays.sort(studentArray, Comparator.comparingInt(Student::getId));
+        Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id));
+
         Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id).reversed());
-        Arrays.sort(studentArray,Comparator.comparingInt((Student s) -> s.id).reversed());
 
         Arrays.sort(
                 studentArray,
                 Comparator.comparingInt(Student::getId).reversed()
         );
 
-        //multilevel sorting
+        //multilevel sorting , reversing
+
         Arrays.sort(
                 studentArray,
                 Comparator.comparingInt(Student::getId)
@@ -675,7 +660,7 @@ public static void main(String[] args) {
                 studentArray,
                 Comparator.comparingInt(Student::getId)
                         .thenComparing(Student::getName)
-                        .reversed()
+                              .reversed()
         );
 
 
@@ -684,13 +669,6 @@ public static void main(String[] args) {
         String[] stringArray1 =reverseStringArrayJava8(stringArray);
         System.out.println(Arrays.toString(stringArray)+" : "+Arrays.toString(stringArray1));
 
-
-
-        //Collections.reverse(collectionObject)
-        //✔ Works in-place for object arrays  -- String, Wrapper , Custom Objects
-        //❌ Not for primitive arrays (int[], char[])
-        // becoz for primitive array is stored as one list element
-        // ie one Object , Non-primitive array's elements are stored as separate elements in list
 
         List<String> listString2 = Arrays.asList(stringArray);
         Collections.sort(listString2);
