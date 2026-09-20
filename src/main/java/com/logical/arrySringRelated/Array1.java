@@ -144,6 +144,9 @@ class ArrayMethodsDemo {
                         .toArray();
         Object[] arr1 = list.stream().toArray();
 
+        List<Integer> listOfInteger = Arrays.stream(integerArray)   // Stream<Integer>
+                .collect(Collectors.toList());
+
 
         // toArray -- converts a  List to an Array of given datatype by converting to stream first
         Integer[] arr2 = list.stream()
@@ -514,8 +517,10 @@ class Student implements Comparable<Student>{
     String name;
 
     @Override
-    public int compareTo(Student other) {
-        return Integer.compare(this.id, other.id); // ascending order by id
+    public int compareTo(Student other)
+    {
+        return Integer.compare(this.id, other.id);
+        // ascending order by id
     }
 }
 
@@ -526,15 +531,18 @@ public static void main(String[] args) {
 
         // reverse the existing array of int/string/char  -- manual way only , no shortcut
         int[] intArray = {1, 2, 3, 4, 5};
-        reverseIntArray(intArray);
+        reverseDoubleArray();
         System.out.println(Arrays.toString(intArray));
 
         Arrays.sort(intArray);
         System.out.println(Arrays.toString(intArray));
 
-        Integer[] arr = {5, 2, 8, 1, 3};
-        Integer[] sorted = Arrays.stream(arr).sorted().toArray(Integer[]::new);
-        System.out.println(Arrays.toString(sorted));
+        Integer[] integerArray = {5, 2, 8, 1, 3};
+        Arrays.sort(integerArray);
+        System.out.println(Arrays.toString(integerArray));
+
+        Integer[] sortedIntegerArray = Arrays.stream(integerArray).sorted().toArray(Integer[]::new);
+        System.out.println(Arrays.toString(sortedIntegerArray));
 
         /*
            Can be used with
@@ -545,9 +553,6 @@ public static void main(String[] args) {
            String
          */
 
-        Integer[] arr = {5, 2, 8, 1, 3};
-        Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
 
          /*
             use of Comparator to sort
@@ -626,7 +631,6 @@ public static void main(String[] args) {
         System.out.println("bbbb "+Arrays.toString(stringArray)+" : "+listString2);
 
         Collections.reverse(listString2);
-        // same array ? is reversed and list as well
         System.out.println("cc "+Arrays.toString(stringArray)+" : "+listString2);
 
         List<String> listString3 = new ArrayList<>(Arrays.asList(stringArray));
@@ -652,44 +656,52 @@ public static void main(String[] args) {
 
 
     // reverse any array -- primitive , non-primitive , object
-    public static void reverseIntArray(int[] arr) {
+    public static void reverseDoubleArray() {
+
+        double[] doubleArray = {1.1,4.5,2.6,7,3,8,9};
 
         int startIndex = 0;
-        int endIndex = arr.length - 1;
-
-        System.out.println("Original : "+Arrays.toString(arr));
-
+        int endIndex = doubleArray.length - 1;
+        System.out.println("Original : "+Arrays.toString(doubleArray));
         while (startIndex < endIndex) {
-            int temp = arr[startIndex];
-            arr[startIndex] = arr[endIndex];
-            arr[endIndex] = temp;
+            int temp = doubleArray[startIndex];
+            doubleArray[startIndex] = doubleArray[endIndex];
+            doubleArray[endIndex] = temp;
 
             startIndex++;
             endIndex--;
         }
+        System.out.println("Reversed : "+Arrays.toString(doubleArray));
 
-        System.out.println("Reversed : "+Arrays.toString(arr));
 
         startIndex = 0;
-        endIndex = arr.length - 1;
-
+        endIndex = doubleArray.length - 1;
         do{
-            int temp = arr[startIndex];
-            arr[startIndex] = arr[endIndex];
-            arr[endIndex] = temp;
+            int temp = doubleArray[startIndex];
+            doubleArray[startIndex] = doubleArray[endIndex];
+            doubleArray[endIndex] = temp;
             startIndex++;
             endIndex--;
         }while (startIndex < endIndex);
+        System.out.println("Reversed : "+Arrays.toString(doubleArray));
 
+
+        for(int i=0; i< doubleArray.length/2 ; i++)
+        {
+            int temp = doubleArray[i];
+            doubleArray[i] = arr[doubleArray.length-1 - i];
+            doubleArray[arr.length-1 - i] = temp;
+        }
         System.out.println("Reversed : "+Arrays.toString(arr));
 
-        for(int i=0; i< arr.length/2 ; i++)
+        int endIndex1 = doubleArray.length -1 ;
+        for(int i=0; i< doubleArray.length/2 ; i++)
         {
-            int temp = arr[i];
-            arr[i] = arr[arr.length-1 - i];
-            arr[arr.length-1 - i] = temp;
+            int temp = doubleArray[i];
+            doubleArray[i] = arr[endIndex1];
+            doubleArray[endIndex1] = temp;
+            endIndex1--;
         }
-
         System.out.println("Reversed : "+Arrays.toString(arr));
     }
 
@@ -712,6 +724,7 @@ public static void main(String[] args) {
     }
 
 }
+
 
 class Array2 {
     public static void main(String[] args) {
