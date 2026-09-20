@@ -16,6 +16,14 @@ class ArrayMethodsDemo {
         // returns number of elements the array contains
         System.out.println("length: " + baseArr.length);
 
+        // 2D array --- length provie -- number of rows
+        int[][] arr = {
+                {1, 2, 3},       // 3 elements
+                {4, 5, 6, 7}     // 4 elements
+        };
+        // arr.length      // 2 → number of rows
+        // arr[0].length   // 3 → first row has 3 elements
+        // arr[1].length   // 4 → second row has 4 elements
 
         /* =========================
          toString() is an inbuilt method in Arrays class Converts 1D array to readable String
@@ -730,7 +738,6 @@ class Array2 {
     public static void main(String[] args) {
 
         // get min and max integer from int array
-
         int[] array = {1, 4, 23, 5, 76, 13, 64,23};
         System.out.println(Arrays.toString(array));
 
@@ -759,71 +766,78 @@ class Array2 {
 class Array4 {
     public static void main(String[] args) {
 
-        // Kth smallest and Kth larget ---first sort then get array[n-1] and array[0]
-        Integer[] array = {1, 4, 23, 5, 76, 13, 64};
-        Arrays.sort(array);   // works for primitive and non-primitive
-        System.out.println(Arrays.toString(array));
+        //Kth smallest and Kth larget ---first sort asc/desc then get array[n-1] and array[0]
 
-        Arrays.sort(array, Comparator.reverseOrder());
-        //  Arrays.sort(array, Comparator.reverseOrder());  -- if primitive then  Arrays.sort,Collections.reverseOrder());
+        Integer[] array = {1, 4, 23, 5, 76, 13, 64};
+        Arrays.sort(array);
         System.out.println(Arrays.toString(array));
 
         String[] array1 = {"cc", "aa", "ww", "ff"};
         Arrays.sort(array1, Comparator.reverseOrder());
         System.out.println(Arrays.toString(array1));
 
-        // even if it was int array --then also auto boxing
-        for (Integer i : array) {
-            System.out.print(i + " ");
-        }
-
         secondHighest();
         secondLowest();
 
     }
 
-    public static void secondHighest()
-    {
-        int[] arr = {10, 5, 20, 8, 20, 3};
-        int first = Integer.MIN_VALUE;
-        int second = Integer.MIN_VALUE;
 
-        for (int n : arr) {
-            if (n > first) {       // new maximum found
-                second = first;
-                first = n;
-            } else if (n > second && n < first) { // between first and second
-                second = n;
+    public static void secondHighest() {
+
+        int[] intArray = {10, 5, 20, 8, 20, 3};
+
+        int highest = Integer.MIN_VALUE;
+        int secondHighest = Integer.MIN_VALUE;
+
+        for (int current : intArray) {
+
+            if (current > highest) {
+
+                // store earlier highest as secondHighest and  reassign the highest as current
+                secondHighest = highest;
+                highest = current;
+
+            } else if (current > secondHighest && current < highest) {
+
+                // Current number is between highest and second highest so current need to be assigned to secondhighest
+                secondHighest = current;
+
             }
         }
 
-        if (second == Integer.MIN_VALUE) {
+        if (secondHighest == Integer.MIN_VALUE) {
             System.out.println("No second highest element exists.");
         } else {
-            System.out.println("Second highest element: " + second);
+            System.out.println("Second highest element: " + secondHighest);
         }
     }
 
-    public static void secondLowest()
-    {
+
+
+    public static void secondLowest() {
+
         int[] arr = {10, 5, 20, 8, 20, 3};
 
-        int first = Integer.MAX_VALUE;
-        int second = Integer.MAX_VALUE;
+        int lowest = Integer.MAX_VALUE;
+        int secondLowest = Integer.MAX_VALUE;
 
-        for (int n : arr) {
-            if (n < first) {          // new minimum found
-                second = first;
-                first = n;
-            } else if (n < second && n > first) { // between first and second
-                second = n;
+        for (int current : arr) {
+
+            if (current < lowest) {
+                // New lowest found
+                secondLowest = lowest;
+                lowest = current;
+
+            } else if (current < secondLowest && current > lowest) {
+                // Current value is between lowest and second lowest
+                secondLowest = current;
             }
         }
 
-        if (second == Integer.MAX_VALUE) {
+        if (secondLowest == Integer.MAX_VALUE) {
             System.out.println("No second lowest element exists.");
         } else {
-            System.out.println("Second lowest element: " + second);
+            System.out.println("Second lowest element: " + secondLowest);
         }
     }
 }
@@ -831,8 +845,10 @@ class Array4 {
 class Array41 {
     public static void main(String[] args) {
 
+        //#############################   distinct in an array  --  use of distinct() , hashSet()
+
         int[] intArray = {1, 4, 22, 14, 19, 9, 5, 7, 22, 0};
-        IntStream.of(intArray).distinct().toArray();
+        Arrays.stream(intArray).distinct().toArray();
         // toArray() aplied on primitive Stream ie int, long, double gives primitive array ,
         // if applied on non-primitive stream without implementation then returns object array
         // if applied on Collections then returns as per the Implementation
@@ -840,6 +856,7 @@ class Array41 {
         Integer[] numbers = {1, 2, 2, 3, 1};
         LinkedHashSet<Integer> set = new LinkedHashSet<>(Arrays.asList(numbers));
         Integer[] uniqueNumbers = set.toArray(new Integer[0]);
+        // equivalent to (Integer[]: new)
 
         String[] namesStringArray = {"Amit", "Ravi", "Amit", "Neha", "Ravi"};
         String[] uniqueNamesStringArray
@@ -869,22 +886,6 @@ class Array41 {
                 .distinct()   // distinct hash
                 .toArray(Student[]::new);
 
-
-        int[] nums = {1, 2, 2, 3, 1};
-
-        int[] uniqueNums = Arrays.stream(nums)
-                .distinct()
-                .toArray();
-
-
-        int[] numsX = {1, 2, 2, 3, 1};
-        Integer[] numsBoxedX = Arrays.stream(numsX).boxed().toArray(Integer[]::new);
-
-        // duplicate removed
-        Integer[] uniqueNumsX = new LinkedHashSet<>(Arrays.asList(numsBoxedX))
-                .toArray(new Integer[0]);
-        System.out.println(Arrays.toString(uniqueNumsX));
-
     }
 }
 
@@ -909,28 +910,22 @@ class Array42 {
 
         for(int i=0 ; i <= intArray.length-1 ; i++)
         {
+            // inner for loop starting with i+1 is important
             for(int j=i+1 ; j <= intArray.length-1 ; j++) {
                 if (intArray[i] == intArray[j]) {
-                    // we can add to any collection but list will store numberOfTimes-1  times
+                    // we can add to any collection but list will store 1  times
                     setOfInts.add(intArray[i]);
+                    listOfInt.add(intArray[i]);
                 } else {
 
-                }
-            }
-            for(int j=i+1 ; j <= intArray.length-1 ; j++) {
-                if (intArray[i] ==intArray[j] ) {
-                    // we can add to any collection but list will store numberOfTimes-1  times
-                    listOfInt.add(intArray[i]);
-                }else
-                {
-                    listOfInt.add(intArray[i]);
                 }
             }
         }
         System.out.println("List : "+listOfInt);
         System.out.println("Set : "+setOfInts);
-
     }
+
+
     public static void withoutArrayCollectionObject()
     {
         int[] arr = {1, 2, 2, 3, 1, 2};
@@ -979,25 +974,14 @@ class Array42 {
         System.out.println("Student[]: " + countOccurrences(students));
     }
 
+    // int[] to Integer[]
+    // char[] to Character[]
     public static <T> Map<T, Integer> countOccurrences(T[] arr) {
         Map<T, Integer> countMap = new HashMap<>();
         for (T elem : arr) {
             countMap.put(elem, countMap.getOrDefault(elem, 0) + 1);
         }
         return countMap;
-    }
-
-    // Overload for int[] (primitive)
-    public static Map<Integer, Integer> countOccurrences(int[] arr) {
-        Integer[] boxed = Arrays.stream(arr).boxed().toArray(Integer[]::new);
-        return countOccurrences(boxed);
-    }
-
-    // Overload for char[] (primitive)
-    public static Map<Character, Integer> countOccurrences(char[] arr) {
-        Character[] boxed = new Character[arr.length];
-        for (int i = 0; i < arr.length; i++) boxed[i] = arr[i];
-        return countOccurrences(boxed);
     }
 }
 
@@ -1024,24 +1008,32 @@ class Array5 {
                 }
             }
         }
-        System.out.println(map.size() + "  times ");
         System.out.println(map);
+        System.out.println(map.size() + "  times ");
+
     }
 }
 
 class Array6 {
     public static void main(String[] args) {
 
-        String sentence = "Reverse every word in this sentence";
+        //reverse a word
+        String word="word";
 
+        StringBuilder reversedWord = new StringBuilder();
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversedWord.append(word.charAt(i));
+        }
+        System.out.println(reversedWord);
+
+
+        String sentence = "Reverse a sentence";
         String rev = "";
         char[] ch1 = sentence.toCharArray();
         for (int i = sentence.length() - 1; i >= 0; i--) {
             rev += ch1[i];
         }
         System.out.println(rev);
-        // use StringBuffer..becoz in above case....since immutable...
-        // s1.length() String Objects will be created..
 
         StringBuffer rev2 = new StringBuffer();
         for (int i = sentence.length() - 1; i >= 0; i--) {
@@ -1050,85 +1042,33 @@ class Array6 {
         System.out.println(rev2);
 
         StringBuilder sb = new StringBuilder(sentence);
-        // or create bank sb and sb.append(stringObject); --same result
+        // or create blank "" sb and then sb.append(stringObject); -- same result
         System.out.println(sb.reverse());
         String s2 = sb.reverse().toString();
 
-        // Remove trailing space
-        String reversedSentence = sentence.toString().trim();
-        System.out.println(reversedSentence);
 
         String sentence2 = "Reverse every word in this sentence";
-
         String reversed2 = Arrays.stream(sentence2.split(" "))
                 .map(word -> new StringBuilder(word).reverse().toString())
                 .collect(Collectors.joining(" "));
-
         System.out.println(reversed2);
-    }
 
-}
 
-class Array61 {
-    public static void main(String[] args) {
-
-        String sentence = "Reverse every word in this sentence";
-
-        String[] words = sentence.split(" "); // split sentence into words
+        String[] words = sentence2.split(" ");
         StringBuilder result = new StringBuilder();
-
         for (String word : words) {
             StringBuilder reversedWord = new StringBuilder(word);
             result.append(reversedWord.reverse()).append(" ");
         }
-
-        // Remove trailing space
-        String reversedSentence = result.toString().trim();
-        System.out.println(reversedSentence);
-
-        String sentence2 = "Reverse every word in this sentence";
-
-        String reversed2 = Arrays.stream(sentence2.split(" "))
-                .map(word -> new StringBuilder(word).reverse().toString())
-                .collect(Collectors.joining(" "));
-
         System.out.println(reversed2);
 
-        reverseEveryWordInSentense();
-
     }
-
-    public static void reverseEveryWordInSentense()
-    {
-        // reverse every word in sentence...not reverse a sentence
-
-        String sentence = "Reverse every word in this sentence";
-        String[] words = sentence.split(" ");
-        StringBuilder reversedSentence = new StringBuilder();
-
-        // Reverse each word and construct the reversed sentence
-        for (String word : words) {
-            String reversedWord = reverseWord(word);
-            reversedSentence.append(reversedWord).append(" ");
-        }
-        System.out.println(reversedSentence.toString().trim());
-    }
-
-    public static String reverseWord(String word) {
-        StringBuilder reversedWord = new StringBuilder();
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversedWord.append(word.charAt(i));
-        }
-        return reversedWord.toString();
-    }
-
 }
 
+// count which vowel how many times
 class WhichVowelHowManyTimes {
 
     public static void main(String[] args) {
-
-        // count which vowel how many times
 
         withInitialisedCount();
         withoutCollection();
@@ -1140,6 +1080,7 @@ class WhichVowelHowManyTimes {
         String string = "shubham anil shende";
 
         String input = string.toLowerCase();
+        // Convert to lowercase for simplicity
 
         Map<Character, Integer> vowelCountMap = new HashMap<>();
         vowelCountMap.put('a', 0);
@@ -1148,12 +1089,11 @@ class WhichVowelHowManyTimes {
         vowelCountMap.put('o', 0);
         vowelCountMap.put('u', 0);
 
-        for (char c : input.toCharArray()) {
-            if (vowelCountMap.containsKey(c)) {
-                vowelCountMap.put(c, vowelCountMap.get(c) + 1);
+        for (char vowelElement : input.toCharArray()) {
+            if (vowelCountMap.containsKey(vowelElement)) {
+                vowelCountMap.put(vowelElement, vowelCountMap.getOrDefault(vowelElement,0) + 1);
             }
         }
-
         System.out.println("Vowel counts : "+vowelCountMap.entrySet());
 
     }
@@ -1162,7 +1102,7 @@ class WhichVowelHowManyTimes {
     {
         String string = "shubham anil shende";
 
-        // Convert to lowercase for simplicity
+
         string = string.toLowerCase();
 
         // Array to store counts for vowels: a, e, i, o, u
@@ -1189,33 +1129,10 @@ class WhichVowelHowManyTimes {
             }
         }
         System.out.println(counts[0]+" : "+counts[1]+" : "+counts[2]+" : "+counts[3]+" : "+counts[4]);
-
-    }
-
-    public static void withCollection()
-    {
-        String string = "shubham anil shende";
-
-        // Convert to lowercase to handle uppercase letters
-        string = string.toLowerCase();
-
-        // Set of vowels
-        Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
-
-        // Map to store counts
-        Map<Character, Integer> vowelCount = new HashMap<>();
-
-        // Loop through each character
-        for (char ch : string.toCharArray()) {
-            if (vowels.contains(ch)) {
-                vowelCount.put(ch, vowelCount.getOrDefault(ch, 0) + 1);
-            }
-        }
-
-        System.out.println("Vowel counts : "+vowelCount.entrySet());
     }
 
 }
+
 
 class ConsSequenceOfInts {
 
@@ -1241,7 +1158,6 @@ class ConsSequenceOfInts {
                     int temp = arrayOriginal[j];
                     arrayOriginal[j]=arrayOriginal[j-1];
                     arrayOriginal[j-1]=temp;
-
                 }
             }
         }
@@ -1281,6 +1197,93 @@ class ConsSequenceOfInts {
         }
 
         System.out.println("maxStreak Last: "+ maxStreakOut+" : "+endIndexOut);
+
+
+        // longest consecutive sequence , u can rearrage
+        int[] arr = {100, 4, 200, 1, 3, 2};
+
+        Set<Integer> set = new HashSet<>();
+
+        for (int element : arr) {
+            set.add(element);
+        }
+
+        int longestSequence = 0;
+
+        for (int element : set) {
+
+            // Start checking only if this is the beginning of a sequence
+            if (!set.contains(element - 1)) {
+
+                int currentElement = element;
+                int currentSequence = 1;
+
+                while (set.contains(currentElement + 1)) {
+                    currentElement++;
+                    currentSequence++;
+                }
+
+                longestSequence = Math.max(longestSequence, currentSequence);
+            }
+        }
+
+        System.out.println("Longest consecutive sequence: " + longestSequence);
+
+
+        String stringInput ="abcgad iwsadadda";
+        Character firstNonRepeated = null;
+
+        Map<Character, Integer> charCount = new LinkedHashMap<>();
+
+        // Count frequency of each character
+        for (char ch : stringInput.toCharArray()) {
+            charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
+        }
+
+        // LinkedHashMap maintains insertion order
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            if (entry.getValue() == 1) {
+                firstNonRepeated = entry.getKey();
+            }
+        }
+        System.out.println("First Non0-repeated : " + firstNonRepeated);
+
+        Map<Character, Long> charCount = str.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(
+                        c -> c,
+                        LinkedHashMap::new,
+                        Collectors.counting()
+                ));
+
+        firstNonRepeated = charCount.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
+
+
+        //duplicate elelment and arrange dublicate element in assending
+        int[] arr = {9, 9, 3, 3, 8, 5, 5, 7, 2};
+
+        List<Integer> duplicates = Arrays.stream(arr)
+                .boxed()
+                .collect(Collectors.groupingBy(
+                        n -> n,
+                        Collectors.counting()
+                 ))
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .sorted()
+                .collect(Collectors.toList());
+
+        System.out.println(duplicates);
+
+
+    }
 
     }
 }
