@@ -126,7 +126,7 @@ class ArrayMethodsDemo {
         double[] doubleArray = {1.5, 2.7, 3.14};
         DoubleStream doubleStream = Arrays.stream(doubleArray);
 
-        double  average = Arrays.stream(arr).average().orElse(0.0);
+        double average = Arrays.stream(arr).average().orElse(0.0);
         System.out.println("average().average(): " + average);
 
         long[] longArray = {100L, 200L, 300L};
@@ -137,22 +137,22 @@ class ArrayMethodsDemo {
         String[] stringArray = {"apple", "banana", "cherry"};
         Stream<String> stringStream = Arrays.stream(stringArray);
 
-        Integer[] boxedIntArray,integerArray = {5, 2, 9, 1};
+        Integer[] boxedIntArray, integerArray = {5, 2, 9, 1};
         Stream<Integer> boxedIntStream = Arrays.stream(boxedIntArray);
 
         Stream<User> userStream = Arrays.stream(userArray):
 
         // applies to every non-primitive datatype
         int sum2 = Arrays.stream(integerArray)   // Stream<Integer>
-                    .mapToInt(Integer::intValue)  // IntStream
-                    .sum();
-        System.out.println(Arrays.toString(integerArray)+"stream().sum(): " + sum2);
+                .mapToInt(Integer::intValue)  // IntStream
+                .sum();
+        System.out.println(Arrays.toString(integerArray) + "stream().sum(): " + sum2);
 
 
         // toArray -- converts a  stream to an Array of Objects
         int[] arr3 = list.stream()
-                        .mapToInt(Integer::intValue) // Stream<Integer>
-                        .toArray();
+                .mapToInt(Integer::intValue) // Stream<Integer>
+                .toArray();
         Object[] arr1 = list.stream().toArray();
 
         List<Integer> listOfInteger = Arrays.stream(integerArray)   // Stream<Integer>
@@ -161,16 +161,16 @@ class ArrayMethodsDemo {
 
         // toArray -- converts a  List to an Array of given datatype by converting to stream first
         Integer[] arr2 = list.stream()
-                        .toArray(Integer[]::new);
+                .toArray(Integer[]::new);
 
         int[] intArray = {5, 2, 9, 1};
         Stream<Integer> boxedStream = Arrays.stream(intArray)
-                                            .boxed();
+                .boxed();
 
         int[] intArray = {5, 2, 9, 1};
         Integer[] boxedArray = Arrays.stream(intArray)
-                                .boxed()
-                                .toArray(Integer[]::new);
+                .boxed()
+                .toArray(Integer[]::new);
 
         /* =========================
            setAll() is an inbuilt method in Arrays class with return type void
@@ -179,9 +179,9 @@ class ArrayMethodsDemo {
            calculate a new value using that index only and put the result at that index.
         ========================== */
         long[] longArray = new long[5];
-        logicArr[0]=12L;
-        logicArr[1]=10L;
-        logicArr[2]=8L;
+        logicArr[0] = 12L;
+        logicArr[1] = 10L;
+        logicArr[2] = 8L;
 
         Arrays.setAll(logicArr, i -> i * 10);
         System.out.println("setAll(): " + Arrays.toString(logicArr));
@@ -229,7 +229,7 @@ class ArrayMethodsDemo {
            Creates shallow copy of array of primitive datatypes automatically create a
            deep copy because primitive types hold raw values
          */
-           Return type: same as array type (int[])
+        Return type:same as array type ( int[])
         ========================== */
         int[] clonedArr = arr.clone();
         System.out.println("clone(): " + Arrays.toString(clonedArr));
@@ -248,11 +248,11 @@ class ArrayMethodsDemo {
         Person[] clonedPersonArray = originalPersonArray.clone();
 
         Notice that both arrays contain references pointing to the same Person objects.
-        That's called a shallow copy.
+        That 's called a shallow copy.
 
         Deep copy
         Changing the object through one array
-        doesn't change the corresponding object in the other array
+        doesn 't change the corresponding object in the other array
 
 
         // Using Java 8 Streams
@@ -263,7 +263,7 @@ class ArrayMethodsDemo {
         /* =========================
            deepToString() converts and returns a multi-dimensional arrays as a String
         ========================== */
-        int[][] matrix = {{1, 2}, {3, 4,5,6,7}};
+        int[][] matrix = {{1, 2}, {3, 4, 5, 6, 7}};
         System.out.println("deepToString(): " + Arrays.deepToString(matrix));
         System.out.println(matrix.length);      // rows = 2
         System.out.println(matrix[0].length);   // columns in row 0 = 2
@@ -347,7 +347,7 @@ class ArrayMethodsDemo {
         List<String> list4 = Arrays.stream(stringArray).
                 collect(Collectors.toList());
 
-        int[]--> boxed().collect(Colectiors.toList());
+        int[] -- > boxed().collect(Colectiors.toList());
         Arrays.stream(integerArray).collect(Collectors.toList());
         System.out.println("Stream toList(): " + list4);
 
@@ -398,7 +398,6 @@ class ArrayMethodsDemo {
 }
 
 
-
 // 5 types of array in java
 class Array11 {
     public static void main(String[] args) {
@@ -421,7 +420,7 @@ class Array11 {
         // then we can declare size 4 and add 7 elements
         //---either declare or initialise --not both
 
-        char[] charArray = {'1','4','v','w','9','p','1'};
+        char[] charArray = {'1', '4', 'v', 'w', '9', 'p', '1'};
         System.out.println("Char Array = " + charArray.toString());
 
         String ss1 = "shubham shende";
@@ -458,7 +457,7 @@ class Array11 {
         // large whole number -2,147,483,648 2,147,483,647
         // −214.75 crore
         int[] intArray = {1, 4, 23, 5, 76, 13, 64};
-        String stringFromArray  = Arrays.toString(intArray);
+        String stringFromArray = Arrays.toString(intArray);
         System.out.println("intArray = " + stringFromArray);
 
         // explicitly f is needed , otherwise it will be assumed as Double
@@ -523,13 +522,12 @@ class Array11 {
 
 @AllArgsConstructor
 @Data
-class Student implements Comparable<Student>{
+class Student implements Comparable<Student> {
     int id;
     String name;
 
     @Override
-    public int compareTo(Student other)
-    {
+    public int compareTo(Student other) {
         return Integer.compare(this.id, other.id);
         // ascending order by id
     }
@@ -538,7 +536,12 @@ class Student implements Comparable<Student>{
 
 //sorting and reversing array
 class Array3 {
-public static void main(String[] args) {
+    char[] reversedCharArray = new StringBuilder(new String(arr))
+            .reverse()
+            .toString()
+            .toCharArray();
+
+    public static void main(String[] args) {
 
         // reverse the existing array of int/string/char  -- manual way only , no shortcut
         int[] intArray = {1, 2, 3, 4, 5};
@@ -578,7 +581,7 @@ public static void main(String[] args) {
         System.out.println(Arrays.toString(arr));
 
 
-        Student[] studentArray = new Student[] {
+        Student[] studentArray = new Student[]{
                 new Student(3, "Ravi"),
                 new Student(1, "Amit"),
                 new Student(2, "Neha")
@@ -589,7 +592,7 @@ public static void main(String[] args) {
         Arrays.sort(studentArray);
 
         // Collections.reverseOrder() → reverses the natural Comparable order if it exists
-        Arrays.sort(studentArray,Collections.reverseOrder());
+        Arrays.sort(studentArray, Collections.reverseOrder());
 
 
         //Anonymous Comparator (Old but valid)
@@ -626,29 +629,29 @@ public static void main(String[] args) {
                 studentArray,
                 Comparator.comparingInt(Student::getId)
                         .thenComparing(Student::getName)
-                              .reversed()
+                        .reversed()
         );
 
 
         String[] stringArray = {"A", "G", "C"};
 
-        String[] stringArray1 =reverseStringArrayJava8(stringArray);
-        System.out.println(Arrays.toString(stringArray)+" : "+Arrays.toString(stringArray1));
+        String[] stringArray1 = reverseStringArrayJava8(stringArray);
+        System.out.println(Arrays.toString(stringArray) + " : " + Arrays.toString(stringArray1));
 
 
         List<String> listString2 = Arrays.asList(stringArray);
         Collections.sort(listString2);
-        System.out.println("bbbb "+Arrays.toString(stringArray)+" : "+listString2);
+        System.out.println("bbbb " + Arrays.toString(stringArray) + " : " + listString2);
 
         Collections.reverse(listString2);
-        System.out.println("cc "+Arrays.toString(stringArray)+" : "+listString2);
+        System.out.println("cc " + Arrays.toString(stringArray) + " : " + listString2);
 
         List<String> listString3 = new ArrayList<>(Arrays.asList(stringArray));
         Collections.reverse(listString3);
         // list is revered and array unaffected
-        System.out.println("dd "+Arrays.toString(stringArray)+" : "+listString3);
+        System.out.println("dd " + Arrays.toString(stringArray) + " : " + listString3);
 
-        char[] charArray = new char[]{'f','s','w','s','k','p'};
+        char[] charArray = new char[]{'f', 's', 'w', 's', 'k', 'p'};
         System.out.println(Arrays.toString(charArray));
         // becoz for primitive array is stored as one list element
 
@@ -664,15 +667,14 @@ public static void main(String[] args) {
 
     }
 
-
     // reverse any array -- primitive , non-primitive , object
     public static void reverseDoubleArray() {
 
-        double[] doubleArray = {1.1,4.5,2.6,7,3,8,9};
+        double[] doubleArray = {1.1, 4.5, 2.6, 7, 3, 8, 9};
 
         int startIndex = 0;
         int endIndex = doubleArray.length - 1;
-        System.out.println("Original : "+Arrays.toString(doubleArray));
+        System.out.println("Original : " + Arrays.toString(doubleArray));
         while (startIndex < endIndex) {
             int temp = doubleArray[startIndex];
             doubleArray[startIndex] = doubleArray[endIndex];
@@ -681,38 +683,36 @@ public static void main(String[] args) {
             startIndex++;
             endIndex--;
         }
-        System.out.println("Reversed : "+Arrays.toString(doubleArray));
+        System.out.println("Reversed : " + Arrays.toString(doubleArray));
 
 
         startIndex = 0;
         endIndex = doubleArray.length - 1;
-        do{
+        do {
             int temp = doubleArray[startIndex];
             doubleArray[startIndex] = doubleArray[endIndex];
             doubleArray[endIndex] = temp;
             startIndex++;
             endIndex--;
-        }while (startIndex < endIndex);
-        System.out.println("Reversed : "+Arrays.toString(doubleArray));
+        } while (startIndex < endIndex);
+        System.out.println("Reversed : " + Arrays.toString(doubleArray));
 
 
-        for(int i=0; i< doubleArray.length/2 ; i++)
-        {
+        for (int i = 0; i < doubleArray.length / 2; i++) {
             int temp = doubleArray[i];
-            doubleArray[i] = arr[doubleArray.length-1 - i];
-            doubleArray[arr.length-1 - i] = temp;
+            doubleArray[i] = arr[doubleArray.length - 1 - i];
+            doubleArray[arr.length - 1 - i] = temp;
         }
-        System.out.println("Reversed : "+Arrays.toString(arr));
+        System.out.println("Reversed : " + Arrays.toString(arr));
 
-        int endIndex1 = doubleArray.length -1 ;
-        for(int i=0; i< doubleArray.length/2 ; i++)
-        {
+        int endIndex1 = doubleArray.length - 1;
+        for (int i = 0; i < doubleArray.length / 2; i++) {
             int temp = doubleArray[i];
             doubleArray[i] = arr[endIndex1];
             doubleArray[endIndex1] = temp;
             endIndex1--;
         }
-        System.out.println("Reversed : "+Arrays.toString(arr));
+        System.out.println("Reversed : " + Arrays.toString(arr));
     }
 
     public static String[] reverseStringArrayJava8(String[] arr) {
@@ -720,11 +720,6 @@ public static void main(String[] args) {
                 .mapToObj(i -> arr[arr.length - 1 - i])
                 .toArray(String[]::new);
     }
-
-    char[] reversedCharArray = new StringBuilder(new String(arr))
-                                .reverse()
-                                .toString()
-                                .toCharArray();
 
     public static char[] reverseCharArrayJava8(char[] arr) {
         return IntStream.range(0, arr.length)
@@ -746,7 +741,7 @@ class Array2 {
     public static void main(String[] args) {
 
 
-        int[] array = {1, 4, 23, 5, 76, 13, 64,23};
+        int[] array = {1, 4, 23, 5, 76, 13, 64, 23};
         System.out.println(Arrays.toString(array));
 
         Arrays.sort(array);
@@ -846,7 +841,6 @@ class Array4 {
     }
 
 
-
     public static void secondLowest() {
 
         int[] arr = {10, 5, 20, 8, 20, 3};
@@ -933,16 +927,14 @@ class Array42 {
 
     }
 
-    public static void duplicatesInArray()
-    {
-        int[] intArray = {1, 2, 2, 3, 1, 2,7,3,9,12,12};
+    public static void duplicatesInArray() {
+        int[] intArray = {1, 2, 2, 3, 1, 2, 7, 3, 9, 12, 12};
 
-        Set<Integer> setOfInts= new HashSet<>();
+        Set<Integer> setOfInts = new HashSet<>();
 
-        for(int i=0 ; i <= intArray.length-1 ; i++)
-        {
+        for (int i = 0; i <= intArray.length - 1; i++) {
             // inner for loop starting with i+1 is important
-            for(int j=i+1 ; j <= intArray.length-1 ; j++) {
+            for (int j = i + 1; j <= intArray.length - 1; j++) {
                 if (intArray[i] == intArray[j]) {
                     // we can add to any collection but list will store 1  times
                     setOfInts.add(intArray[i]);
@@ -951,13 +943,12 @@ class Array42 {
                 }
             }
         }
-        System.out.println("List : "+listOfInt);
-        System.out.println("Set : "+setOfInts);
+        System.out.println("List : " + listOfInt);
+        System.out.println("Set : " + setOfInts);
     }
 
 
-    public static void withoutArrayCollectionObject()
-    {
+    public static void withoutArrayCollectionObject() {
         int[] arr = {1, 2, 2, 3, 1, 2};
 
         boolean[] counted = new boolean[arr.length];
@@ -1033,7 +1024,9 @@ class Array5 {
 
         for (int i = 0; i < array1.length; i++) {
             for (int j = i + 1; j < array1.length; j++) {
-                if (array1[i] + array1[j] == sum && !map.containsKey(map) && !map.containsValue(map)) {
+                if (array1[i] + array1[j] == sum
+                        && !map.containsKey(map)
+                        && !map.containsValue(map)) {
                     {
                         map.put(array1[i], array1[j]);
                     }
@@ -1050,7 +1043,7 @@ class Array6 {
     public static void main(String[] args) {
 
         //reverse a word
-        String word="word";
+        String word = "word";
 
         StringBuilder reversedWord = new StringBuilder();
         for (int i = word.length() - 1; i >= 0; i--) {
@@ -1102,13 +1095,11 @@ class WhichVowelHowManyTimes {
 
     public static void main(String[] args) {
 
-        withInitialisedCount();
         withoutCollection();
         withCollection();
     }
 
-    public static void withInitialisedCount()
-    {
+    public static void withCollection() {
         String string = "shubham anil shende";
 
         String input = string.toLowerCase();
@@ -1123,17 +1114,15 @@ class WhichVowelHowManyTimes {
 
         for (char vowelElement : input.toCharArray()) {
             if (vowelCountMap.containsKey(vowelElement)) {
-                vowelCountMap.put(vowelElement, vowelCountMap.getOrDefault(vowelElement,0) + 1);
+                vowelCountMap.put(vowelElement, vowelCountMap.getOrDefault(vowelElement, 0) + 1);
             }
         }
-        System.out.println("Vowel counts : "+vowelCountMap.entrySet());
+        System.out.println("Vowel counts : " + vowelCountMap.entrySet());
 
     }
 
-    public static void withoutCollection()
-    {
+    public static void withoutCollection() {
         String string = "shubham anil shende";
-
 
         string = string.toLowerCase();
 
@@ -1160,7 +1149,7 @@ class WhichVowelHowManyTimes {
                     break;
             }
         }
-        System.out.println(counts[0]+" : "+counts[1]+" : "+counts[2]+" : "+counts[3]+" : "+counts[4]);
+        System.out.println(counts[0] + " : " + counts[1] + " : " + counts[2] + " : " + counts[3] + " : " + counts[4]);
     }
 
 }
@@ -1168,70 +1157,44 @@ class WhichVowelHowManyTimes {
 
 class ConsSequenceOfInts {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         System.out.println("hello...");
 
-        int[] arrayOriginal = {87,23,7,13,25,14,3,18,15,12,30,31,32,33,34,35,24};
+        int[] arrayOriginal = {87, 23, 7, 13, 25, 14, 3, 18, 15, 12, 30, 31, 32, 33, 34, 35, 24};
 
-        for(int i=0 ; i<= arrayOriginal.length-1 ;i++)
-        {
-            for(int j=1 ; j<= arrayOriginal.length-1 ;j++)
-            {
-                /*if(arrayOriginal[j] > arrayOriginal[j-1])
-                {
-                    int temp = arrayOriginal[j];
-                    arrayOriginal[j]=arrayOriginal[j-1];
-                    arrayOriginal[j-1]=temp;
-                }*/
+        int maxStreakOut = 1;
+        int endIndexOut = 0;
 
-                if(arrayOriginal[j] < arrayOriginal[j-1])
-                {
-                    int temp = arrayOriginal[j];
-                    arrayOriginal[j]=arrayOriginal[j-1];
-                    arrayOriginal[j-1]=temp;
-                }
-            }
-        }
+        int maxStreak = 1;
+        int endIndex = 0;
 
-        System.out.println("New array : "+ Arrays.toString(arrayOriginal));
-
-        int maxStreakOut=1;
-        int endIndexOut=0;
-
-        int maxStreak=1;
-        int endIndex=0;
-
-        for(int i=1 ; i < arrayOriginal.length ; i++)
-        {
-            if(arrayOriginal[i]==arrayOriginal[i-1])
-            {
-                continue;
-            }
-
-            if(arrayOriginal[i] == arrayOriginal[i-1]+1)
-            {
+        for (int i = 1; i < arrayOriginal.length; i++) {
+            // Check if current number is consecutive to previous number
+            if (arrayOriginal[i] == arrayOriginal[i - 1] + 1) {
+                // Continue current streak
                 maxStreak++;
-                endIndex=i;
-                System.out.println("maxStreak : "+ maxStreak+" : "+arrayOriginal[i]);
-            }else
-            {
-                maxStreak=1;
-                //endIndex=i;
+                // Current streak ends at this index
+                endIndex = i;
+            } else {
+                // Consecutive sequence has broken
+                // Start a new streak from current element
+                maxStreak = 1;
             }
 
-            if(maxStreak>maxStreakOut  && arrayOriginal[i] == arrayOriginal[i-1]+1)
-            {
-                maxStreakOut=maxStreak;
+            // Check if current streak is the longest so far
+            if (maxStreak > maxStreakOut) {
+                maxStreakOut = maxStreak;
                 endIndexOut = endIndex;
-                System.out.println("maxStreak : "+ maxStreak+" : "+endIndex+" : "+maxStreakOut+" : "+endIndexOut);
             }
         }
+        System.out.println("maxStreak Last: " + maxStreakOut + " : " + endIndexOut);
+        int startIndexOut = endIndexOut - maxStreakOut + 1;
+        System.out.print("Longest streak: ");
+        for (int i = startIndexOut; i <= endIndexOut; i++) {
+            System.out.print(arrayOriginal[i] + " ");
+        }
 
-        System.out.println("maxStreak Last: "+ maxStreakOut+" : "+endIndexOut);
-
-
-        // longest consecutive sequence , u can rearrage
+        //##### longest consecutive sequence , u can rearrage
         int[] arr = {100, 4, 200, 1, 3, 2};
 
         Set<Integer> set = new HashSet<>();
@@ -1262,17 +1225,20 @@ class ConsSequenceOfInts {
         System.out.println("Longest consecutive sequence: " + longestSequence);
 
 
-        String stringInput ="abcgad iwsadadda";
+        //##### first non repeated element
+        String stringInput = "abcgad iwsadadda";
         Character firstNonRepeated = null;
 
         Map<Character, Integer> charCount = new LinkedHashMap<>();
+        // LinkedHashMap maintains insertion order
+        // we surely will get first repeated occuring element
 
         // Count frequency of each character
         for (char ch : stringInput.toCharArray()) {
             charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
         }
 
-        // LinkedHashMap maintains insertion order
+
         for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
             if (entry.getValue() == 1) {
                 firstNonRepeated = entry.getKey();
@@ -1280,20 +1246,19 @@ class ConsSequenceOfInts {
         }
         System.out.println("First Non0-repeated : " + firstNonRepeated);
 
-        Map<Character, Long> charCount = str.chars()
+        Character firstNonRepeated = str.chars()
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(
                         c -> c,
                         LinkedHashMap::new,
                         Collectors.counting()
-                ));
-
-        firstNonRepeated = charCount.entrySet()
+                )).entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() == 1)
                 .map(Map.Entry::getKey)
                 .findFirst()
                 .orElse(null);
+        System.out.println(""firstNonRepeated ""+firstNonRepeated);
 
 
         //duplicate elelment and arrange dublicate element in assending
@@ -1304,7 +1269,7 @@ class ConsSequenceOfInts {
                 .collect(Collectors.groupingBy(
                         n -> n,
                         Collectors.counting()
-                 ))
+                ))
                 .entrySet()
                 .stream()
                 .filter(entry -> entry.getValue() > 1)
@@ -1317,5 +1282,5 @@ class ConsSequenceOfInts {
 
     }
 
-    }
+}
 }
