@@ -126,6 +126,9 @@ class ArrayMethodsDemo {
         double[] doubleArray = {1.5, 2.7, 3.14};
         DoubleStream doubleStream = Arrays.stream(doubleArray);
 
+        double  average = Arrays.stream(arr).average().orElse(0.0);
+        System.out.println("average().average(): " + average);
+
         long[] longArray = {100L, 200L, 300L};
         LongStream longStream = Arrays.stream(longArray);
         // for remaining primitive no inbuilt method provided
@@ -597,13 +600,12 @@ public static void main(String[] args) {
                 return Integer.compare(s1.id, s2.id);
             }
         });
-        Arrays.sort(studentArray, (e1, e2) -> e1.id - e2.id);
         Arrays.sort(studentArray, (e1, e2) -> Integer.compare(e1.id, e2.id));
+        Arrays.sort(studentArray, (e1, e2) -> e1.id - e2.id);
 
 
         Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id));
         Arrays.sort(studentArray, Comparator.comparingInt(Student::getId));
-        Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id));
 
         Arrays.sort(studentArray, Comparator.comparingInt(e -> e.id).reversed());
 
@@ -713,14 +715,17 @@ public static void main(String[] args) {
         System.out.println("Reversed : "+Arrays.toString(arr));
     }
 
-    //later
     public static String[] reverseStringArrayJava8(String[] arr) {
         return IntStream.range(0, arr.length)
                 .mapToObj(i -> arr[arr.length - 1 - i])
                 .toArray(String[]::new);
     }
 
-    //later
+    char[] reversedCharArray = new StringBuilder(new String(arr))
+                                .reverse()
+                                .toString()
+                                .toCharArray();
+
     public static char[] reverseCharArrayJava8(char[] arr) {
         return IntStream.range(0, arr.length)
                 .map(i -> arr[arr.length - 1 - i])
@@ -733,15 +738,17 @@ public static void main(String[] args) {
 
 }
 
-
+// get min and max int/long/double/float/integer from int array
+// 1. sort and find
+// 2. assume First element As Min/Max and iterate to find if any element is still smaller/greater
+// 3. stream
 class Array2 {
     public static void main(String[] args) {
 
-        // get min and max integer from int array
+
         int[] array = {1, 4, 23, 5, 76, 13, 64,23};
         System.out.println(Arrays.toString(array));
 
-        // method -- 1
         Arrays.sort(array);
         System.out.println("min-" + array[0] + " max-" + array[array.length - 1]);
 
@@ -758,15 +765,41 @@ class Array2 {
             if (currentElement > maxDefault)
                 maxDefault = currentElement;
         }
-
         System.out.println("min-" + minDefault + " max-" + maxDefault);
+
+
+        //java 8  -- // Integer[]
+        Arrays.stream(arr).min(Integer::compareTo).get().orElse(0);
+        Arrays.stream(arr).max(Integer::compareTo).get().orElse(0);
+
+
+        // int[]
+        Arrays.stream(arr).min().getAsInt();  // -- getAsLong()
+        Arrays.stream(arr).max().getAsInt();  //  -- getAsLong()
+
+        OptionalInt min = Arrays.stream(arr).min();
+        if (min.isPresent()) {
+            System.out.println(min.getAsInt());
+        } else {
+            System.out.println("Array is empty");
+        }
+
+        //--------------------
+        float[] floatArray = {10.5f, 5.2f, 20.8f, 3.1f, 15.6f};
+        float min = (float) IntStream.range(0, floatArray.length)
+                .mapToDouble(i -> floatArray[i])
+                .min()
+                .orElse(0.0);
+
     }
 }
 
 class Array4 {
     public static void main(String[] args) {
 
-        //Kth smallest and Kth larget ---first sort asc/desc then get array[n-1] and array[0]
+        /*
+           Kth smallest and Kth larget ---first sort asc/desc then get array[n-1] and array[0]
+        */
 
         Integer[] array = {1, 4, 23, 5, 76, 13, 64};
         Arrays.sort(array);
@@ -906,8 +939,6 @@ class Array42 {
 
         Set<Integer> setOfInts= new HashSet<>();
 
-        List<Integer> listOfInt= new ArrayList<>();
-
         for(int i=0 ; i <= intArray.length-1 ; i++)
         {
             // inner for loop starting with i+1 is important
@@ -915,7 +946,6 @@ class Array42 {
                 if (intArray[i] == intArray[j]) {
                     // we can add to any collection but list will store 1  times
                     setOfInts.add(intArray[i]);
-                    listOfInt.add(intArray[i]);
                 } else {
 
                 }
@@ -930,7 +960,11 @@ class Array42 {
     {
         int[] arr = {1, 2, 2, 3, 1, 2};
 
-        boolean[] counted = new boolean[arr.length]; // keep track of counted elements
+        boolean[] counted = new boolean[arr.length];
+        //marks the index as "true"
+        // first for loop iteration
+        // [true,2,2,3,true,2]
+        // so when outer for loop iterates for 5th times then it does not count 4th index value = 1 once more
 
         for (int i = 0; i < arr.length; i++) {
             if (counted[i]) continue;
@@ -938,8 +972,6 @@ class Array42 {
             int count = 1;
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i] == arr[j]) {
-                // use equals for String and Integer
-                // use == otherwise
                     count++;
                     counted[j] = true;
                 }
