@@ -1042,15 +1042,7 @@ class Array5 {
 class Array6 {
     public static void main(String[] args) {
 
-        //reverse a word
-        String word = "word";
-
-        StringBuilder reversedWord = new StringBuilder();
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversedWord.append(word.charAt(i));
-        }
-        System.out.println(reversedWord);
-
+        ////###### reverse whole sentence/word
 
         String sentence = "Reverse a sentence";
         String rev = "";
@@ -1060,25 +1052,32 @@ class Array6 {
         }
         System.out.println(rev);
 
+
         StringBuffer rev2 = new StringBuffer();
         for (int i = sentence.length() - 1; i >= 0; i--) {
             rev2.append(sentence.charAt(i));
         }
         System.out.println(rev2);
 
+        String word = "word";
+        StringBuilder reversedWord = new StringBuilder();
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversedWord.append(word.charAt(i));
+        }
+        System.out.println(reversedWord);
+
+
         StringBuilder sb = new StringBuilder(sentence);
         // or create blank "" sb and then sb.append(stringObject); -- same result
         System.out.println(sb.reverse());
         String s2 = sb.reverse().toString();
 
+        //###### reverse every word and not the sentence
 
         String sentence2 = "Reverse every word in this sentence";
-        String reversed2 = Arrays.stream(sentence2.split(" "))
-                .map(word -> new StringBuilder(word).reverse().toString())
-                .collect(Collectors.joining(" "));
-        System.out.println(reversed2);
 
 
+        // java old
         String[] words = sentence2.split(" ");
         StringBuilder result = new StringBuilder();
         for (String word : words) {
@@ -1086,6 +1085,13 @@ class Array6 {
             result.append(reversedWord.reverse()).append(" ");
         }
         System.out.println(reversed2);
+
+        // java 8
+        String reversed2 = Arrays.stream(sentence2.split(" "))
+                .map(word -> new StringBuilder(word).reverse().toString())
+                .collect(Collectors.joining(" "));
+        System.out.println(reversed2);
+
 
     }
 }
@@ -1155,7 +1161,7 @@ class WhichVowelHowManyTimes {
 }
 
 
-class ConsSequenceOfInts {
+class longestStreak {
 
     public static void main(String[] args) {
         System.out.println("hello...");
@@ -1194,17 +1200,11 @@ class ConsSequenceOfInts {
             System.out.print(arrayOriginal[i] + " ");
         }
 
-        //##### longest consecutive sequence , u can rearrage
-        int[] arr = {100, 4, 200, 1, 3, 2};
+        //##### longest consecutive sequence , u can rearrage among uniques elements or elemetns can be considered unique then..
 
-        Set<Integer> set = new HashSet<>();
-
-        for (int element : arr) {
-            set.add(element);
-        }
+        Set<Integer> set = new HashSet<>(Arrays.asList(arrayOriginal));
 
         int longestSequence = 0;
-
         for (int element : set) {
 
             // Start checking only if this is the beginning of a sequence
@@ -1212,12 +1212,10 @@ class ConsSequenceOfInts {
 
                 int currentElement = element;
                 int currentSequence = 1;
-
                 while (set.contains(currentElement + 1)) {
                     currentElement++;
                     currentSequence++;
                 }
-
                 longestSequence = Math.max(longestSequence, currentSequence);
             }
         }
@@ -1233,7 +1231,7 @@ class ConsSequenceOfInts {
         // LinkedHashMap maintains insertion order
         // we surely will get first repeated occuring element
 
-        // Count frequency of each character
+        // Count frequency of each character   -- how many times a charactor repeated
         for (char ch : stringInput.toCharArray()) {
             charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
         }
