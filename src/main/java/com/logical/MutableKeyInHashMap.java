@@ -1,10 +1,9 @@
-package com.logical.collection.map;
+package com.logical;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 
 @Data

@@ -7,14 +7,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-public class Streamm {
+public class Stream {
 
 	public static void main(String[] args) {
 
@@ -23,7 +20,7 @@ public class Streamm {
 
 		Comparator<Integer> integerComparator = (i1, i2) -> i1 - i2;
 
-		Integer ii = Stream.of(array).min(integerComparator)
+		Integer ii = java.util.stream.Stream.of(array).min(integerComparator)
 				.orElseThrow(() -> new IllegalArgumentException("Array is empty"));
 
 		System.out.println(ii);
@@ -37,12 +34,12 @@ public class Streamm {
 
 		List<Integer> list = new ArrayList<>(Arrays.asList(22, 33, 44, 11));
 
-		Stream<Integer> sss = list.stream();
+		java.util.stream.Stream<Integer> sss = list.stream();
 
 		char[] ar9 = { 'a', 's', 'w', 's', 'k', 'p' };
 		// System.out.println(Arrays.toString(ar3));
 
-		Stream<char[]> ss = Stream.of(ar9);
+		java.util.stream.Stream<char[]> ss = java.util.stream.Stream.of(ar9);
 
 		long count = ss.count();
 		System.out.println("count : " + count);

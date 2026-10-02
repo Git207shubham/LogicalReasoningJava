@@ -1,4 +1,4 @@
-package com.logical.collection.map;
+package com.logical;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
