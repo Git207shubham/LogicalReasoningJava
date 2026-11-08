@@ -1,6 +1,10 @@
 package com.logical;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -8,7 +12,30 @@ import java.util.stream.Collectors;
 
 public class MyMapTest {
 
-	public static void main(String[] args) {
+	static class Employee {
+		private final int id;
+		private final String name;
+		private final double salary;
+		private final String gender;
+
+		Employee(int id, String name, double salary, String gender) {
+			this.id = id;
+			this.name = name;
+			this.salary = salary;
+			this.gender = gender;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		@Override
+		public String toString() {
+			return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", gender=" + gender + "]";
+		}
+	}
+
+	public static void employeeMapExample() {
 
 		List<Employee> employeeList = new ArrayList<>();
 		// Add some employees to the list
@@ -23,6 +50,7 @@ public class MyMapTest {
 
 		System.out.println(employeeList);
 
+		// LinkedHashMap keeps insertion order (HashMap does not)
 		Map<Integer, Employee> emap = new LinkedHashMap<>();
 		for (Employee e : employeeList) {
 			emap.put(e.getId(), e);
@@ -33,6 +61,8 @@ public class MyMapTest {
 		emap.entrySet().stream()
 				.forEach(entry -> System.out.println("EMP-ID : " + entry.getKey() + " Employee " + entry.getValue()));
 
+		// e2 - e1 -> sorts by key in DESCENDING order (e1 - e2 would be ascending)
+		// same as Map.Entry.comparingByKey(Comparator.reverseOrder())
 		Comparator<Entry<Integer, Employee>> comparator = (e1, e2) ->e2.getKey()- e1.getKey() ;
 
 		emap.entrySet().stream().sorted(comparator)
@@ -49,7 +79,9 @@ public class MyMapTest {
 		Integer valueAdded = scoresMap.put("Chardlie", 92);
 		// returns previously associated or null if newly added
 
-		scoresMap.putIfAbsent("Alice", 105); // return null if
+		// adds only if the key is missing; "Alice" exists, so value stays 95 and 95 is returned
+		// (returns null if the key was absent and the value was added)
+		scoresMap.putIfAbsent("Alice", 105);
 
 		boolean flag1 = scoresMap.containsKey("Bobd");
 		boolean flag2 = scoresMap.containsValue(95);
@@ -71,6 +103,8 @@ public class MyMapTest {
 
 		// prints key and value..forEach method in map takes Biconsumer
 		scoresMap.forEach((key, value) -> System.out.println("key : " + key + " VALUE " + value));
+
+		employeeMapExample();
 	}
 
 }

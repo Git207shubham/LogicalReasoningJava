@@ -4,6 +4,8 @@ public class Test1 {
 
 	public static void main(String[] args) {
 
+		// display() is static synchronized -> lock on CustomRunnable1.class
+		// so t1 finishes entering/exiting before t2 starts
 		CustomRunnable1 r = new CustomRunnable1();
 
 		Thread t1 = new Thread(r);

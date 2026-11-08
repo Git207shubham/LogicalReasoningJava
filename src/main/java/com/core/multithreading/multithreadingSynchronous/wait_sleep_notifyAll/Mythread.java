@@ -1,4 +1,4 @@
-package wait_sleep_notifyAll;
+package com.core.multithreading.multithreadingSynchronous.wait_sleep_notifyAll;
 
 public class Mythread extends Thread {
 
@@ -14,6 +14,7 @@ public class Mythread extends Thread {
 	public void run() {
 
 		System.out.println("welcome.......");
+		// x decides the role: 5 -> waiting thread (show), anything else -> notifying thread (display)
 		if (x == 5) {
 			v.show();
 		} else {

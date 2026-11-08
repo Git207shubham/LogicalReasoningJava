@@ -1,4 +1,4 @@
-package Java8;
+package com.logical.Java8;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Stream {
+public class StreamExamples {
 
 	public static void main(String[] args) {
 

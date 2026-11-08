@@ -1,5 +1,7 @@
 package com.core.multithreading.multithreading.basic;
 
+// "implements Runnable" is redundant here - Thread already implements Runnable
+// so MyRunnable can be started directly (mr.start()) or passed to new Thread(mr)
 public class MyRunnable extends Thread implements Runnable {
 
 	int x;
@@ -33,6 +35,8 @@ class Test {
 
 		t.start();
 
+		// main thread runs this loop at the same time as t runs run()
+		// so "mainnn" and "Run method" lines get mixed
 		for (int i = 50; i < 60; i++) {
 			System.out.println("mainnn method thread --" + i);
 		}

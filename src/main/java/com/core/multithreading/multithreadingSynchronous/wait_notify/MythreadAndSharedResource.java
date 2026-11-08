@@ -1,4 +1,4 @@
-package wait_notify;
+package com.core.multithreading.multithreadingSynchronous.wait_notify;
 
 public class MythreadAndSharedResource extends Thread {
 
@@ -32,10 +32,13 @@ public class MythreadAndSharedResource extends Thread {
 
 	public static void main(String[] args) {
 
+		// mt is never started; it is only used as the shared lock object for wait/notify
 		MythreadAndSharedResource mt = new MythreadAndSharedResource();
 		MythreadAndSharedResource mt1 = new MythreadAndSharedResource(mt);
 		Mythread2 mt2= new Mythread2(mt);
 
+		// NOTE: if mt2 gets the lock first, notify() is called before mt1 waits,
+		// and mt1 then waits forever (wait() has no timeout here)
 		mt1.start();
 		mt2.start();
 	}

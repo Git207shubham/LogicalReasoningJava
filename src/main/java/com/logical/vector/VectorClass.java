@@ -12,6 +12,7 @@ public class VectorClass {
     All public methods are synchronized
     Thread-safe by default so slow and  inefficient) */
 
+    // named main1, so the IDE will NOT run it - rename to main to run this example
     public static void main1(String[] args)
     {
         Vector<String> cityVector=new Vector();
@@ -29,6 +30,8 @@ public class VectorClass {
         cityVector.add("delhi");
 
 
+        // raw Iterator (no <String>) returns Object, so a cast is needed
+        // Iterator<String> itr would avoid the cast
         Iterator itr=cityVector.iterator();
         while(itr.hasNext())
         {
@@ -37,6 +40,7 @@ public class VectorClass {
             System.out.println(h);
         }
 
+		// Enumeration = legacy (pre-Iterator) cursor, only for Vector/Hashtable; read-only, no remove()
 		Enumeration en = cityVector.elements();
 		System.out.println(en.nextElement());
 		System.out.println(en.hasMoreElements());

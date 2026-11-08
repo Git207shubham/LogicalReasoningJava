@@ -1,4 +1,4 @@
-package com.core.multithreadingAsynchronous.using_runnable;
+package com.core.multithreading.multithreadingAsynchronous.using_runnable;
 
 public class MyRunnable implements Runnable {
 

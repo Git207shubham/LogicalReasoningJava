@@ -12,6 +12,9 @@ public class Test {
 		Thread t1 = new Thread(sharedObj1);
 		Thread t2 = new Thread(sharedObj1);
 		
+		// t3 uses a DIFFERENT object, but sharedMethod() is static synchronized
+		// -> class level lock, so t3 also waits; all 3 threads run one after another
+		// (with a non-static synchronized method, t3 would run in parallel with t1/t2)
 		Thread t3 = new Thread(sharedObj2);
 
 		t1.start();

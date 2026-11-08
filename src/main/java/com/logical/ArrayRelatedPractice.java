@@ -193,9 +193,10 @@ class ArraysUtilityMethods {
         List<Long> multipliedList = Arrays.stream(longArray)   // LongStream
                 .map(element -> element * 5)
                 .boxed()                                       // Stream<Long>
-                .collect(Collectors.toList());      ---- List
+                .collect(Collectors.toList());      //---- List
                 // .boxed().toArray(Long::new);     ---- Wrapper array
                 // .toArray();                      ---- primitive array
+        long[] multipliedArray = Arrays.stream(longArray).map(element -> element * 5).toArray();
         System.out.println(multipliedList + " " + Arrays.toString(multipliedArray));
 
 
@@ -583,7 +584,7 @@ class ArrayMinMax {
         int streamMax = Arrays.stream(array).max().orElse(0);   // safer than getAsInt()
         System.out.println("stream min-" + streamMin + " max-" + streamMax);
 
-        OptionalInt optionalMin = Arrays.stream(anyArray).min();
+        OptionalInt optionalMin = Arrays.stream(array).min();
         System.out.println(optionalMin.isPresent() ? optionalMin.getAsInt() : "Array is empty");
 
         // Integer[] -> Stream<Integer>.min(Comparator) returns Optional<Integer>
@@ -708,9 +709,8 @@ class RemoveDuplicatesFromArray {
         System.out.println(Arrays.toString(uniqueInts));
 
         // primitive stream -> toArray() gives a primitive array (int[])
-        int[] intArray = {1, 4, 22, 14, 19, 9, 5, 7, 22, 0};
-        int[] uniqueInts = Arrays.stream(intArray).distinct().toArray();
-        System.out.println(Arrays.toString(uniqueInts));
+        int[] uniqueInts2 = Arrays.stream(intArray).distinct().toArray();
+        System.out.println(Arrays.toString(uniqueInts2));
 
         // LinkedHashSet removes duplicates AND keeps the original order
         Integer[] numbers = {1, 2, 2, 3, 1};
@@ -809,13 +809,13 @@ class FindDuplicatesAndCountOccurrences {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println("Stream groupingBy: " + countByStream);
 
-        groupingBy()
-        Amit → [Amit, Amit]
-        Ravi → [Ravi]
-        Neha → [Neha]
+//        groupingBy()
+//        Amit → [Amit, Amit]
+//        Ravi → [Ravi]
+//        Neha → [Neha]
 
-        Function.identity() : Use the element itself as the key
-        Collectors.counting() : Counts how many elements are in each group
+//        Function.identity() : Use the element itself as the key
+//        Collectors.counting() : Counts how many elements are in each group
     }
 
     // <T> makes this ONE method work for Integer[], Character[], String[], Student[] ...

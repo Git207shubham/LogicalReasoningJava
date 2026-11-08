@@ -12,6 +12,8 @@ public class Test1 {
 
 		Odd o2 = new Odd(151, 161); // thread 4
 
+		// Even and Odd extend Thread, so they can be started directly (no new Thread(...) needed)
+		// all 4 threads run at the same time, so their output is mixed in a random order
 		o1.setName(" ODD_11 ");
 		e1.setName(" EVEN_11 ");
 		o2.setName(" ODD_22 ");
@@ -48,6 +50,7 @@ class Even extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			// extra i++ (plus the loop's i++) -> steps by 2, printing every second number
 			i++;
 		}
 	}

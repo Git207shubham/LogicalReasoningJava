@@ -2,7 +2,10 @@ package com.logical.numberRelated;
 
 import java.util.Scanner;
 
+// for, while and do-while examples
+// do-while runs the body at least once, because the condition is checked at the end
 public class AllLoops {
+	// for loop - multiplication table of 2
 	public void table2() {
 		int i;
 		for (i = 1; i <= 10; i++) {
@@ -10,6 +13,7 @@ public class AllLoops {
 		}
 	}
 
+	// do-while - odd numbers from 20 to 40
 	public void odd() {
 		int n = 20;
 		do {
@@ -22,6 +26,7 @@ public class AllLoops {
 		} while (n <= 40);
 	}
 
+	// while - even numbers from 1 to 20
 	public void even() {
 		int n = 1;
 		while (n <= 20) {
@@ -35,6 +40,7 @@ public class AllLoops {
 		}
 	}
 
+	// do-while counting down - table of 4 in reverse (40 to 4)
 	public void reverseTable() {
 		int n = 10;
 		do {
@@ -44,6 +50,7 @@ public class AllLoops {
 	}
 }
 
+// runner: reads a choice from the console and calls the matching loop example
 class B {
 	public static void main(String args[]) {
 		AllLoops aa = new AllLoops();

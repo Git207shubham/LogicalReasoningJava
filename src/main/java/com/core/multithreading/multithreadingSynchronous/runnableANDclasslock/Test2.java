@@ -26,7 +26,10 @@ class CustomRunnable2 implements Runnable {
 
 	public void display() {
 
-		synchronized (runnableANDclasslock.Runn.class) {
+		// any Class object works as a class level lock; Runn.class (from the abcd package)
+		// is used here, so this block also blocks threads running Runn.display()
+		// CustomRunnable2.class would be the more usual choice
+		synchronized (com.core.multithreading.multithreadingSynchronous.abcd.runnableANDclasslock.Runn.class) {
 
 			try {
 				System.out.println(Thread.currentThread().getName() + " entering ");

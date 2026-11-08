@@ -1,4 +1,4 @@
-package runnableANDclasslock;
+package com.core.multithreading.multithreadingSynchronous.abcd.runnableANDclasslock;
 
 public class Runnn implements Runnable {
 
@@ -12,6 +12,8 @@ public class Runnn implements Runnable {
 
 	public void display() {
 
+		// synchronized block on a Class object = class level lock
+		// Runn.class is the same lock used by Runn's static synchronized display()
 		synchronized (Runn.class) {
 
 			try {

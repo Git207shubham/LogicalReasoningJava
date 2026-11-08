@@ -1,4 +1,4 @@
-package wait_notify;
+package com.core.multithreading.multithreadingSynchronous.wait_notify;
 
 import java.util.Scanner;
 
@@ -13,6 +13,8 @@ public class Mythread2 extends Thread {
 	@Override
 	public void run() {
 
+		// notify() can only be called while holding the lock of mt1
+		// (otherwise IllegalMonitorStateException)
 		synchronized (mt1) {
 
 			System.out.println("welcome to thread_--2");
@@ -25,6 +27,7 @@ public class Mythread2 extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			// wakes the waiting thread; it resumes only after this block exits
 			mt1.notify();
 			
 		}

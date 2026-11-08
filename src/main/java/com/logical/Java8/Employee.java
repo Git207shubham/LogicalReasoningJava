@@ -1,4 +1,4 @@
-package Java8;
+package com.logical.Java8;
 
 public class Employee {
 	private int id;

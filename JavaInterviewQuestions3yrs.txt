@@ -1,0 +1,483 @@
+Core Java
+Collections
+
+SQL and Database
+JDBC + Hibernate/JPA
+Spring Boot and REST API
+
+Microservice Architecture
+DSA (Coding Questions)
+Git and GitHub
+Jenkins and CI/CD
+Docker and Cloud Basics (to cover your cloud gap)
+System Design (Low-Level and High-Level)
+Project and Behavioral
+Agile,Scrum
+Kafka
+Elastic Search Logging
+
+
+========================================================================================================
+CORE JAVA
+========================================================================================================
+
+--- Java Basics and Setup ---
+1.Features of JAVA ?
+4.Why java is used for enterprise level applications mostly ?
+2.What is JDK, JRE, JVM ?
+3.Why is java platform independent ?
+5.How is main method triggered in java project ? Current updates ?
+6.Can we overload main() method ?
+
+--- Data Types ---
+7.What datatypes does java support ?
+8.Primitive datatypes, their range and how to use ?
+9.Autoboxing and unboxing ?
+
+--- Packages and Access Modifiers ---
+10.What is package ?
+11.Access modifiers ?
+12.Scopes of usage of access modifiers ?
+
+--- Classes, Objects and Constructors ---
+17.What is Object Oriented Programming Concept ?
+18.Why JAVA is not fully Object Oriented Programming Language ?
+19.What is Class ?
+20.What is Object ?
+21.What is method ?
+39.Constructor in java and its use ?
+40.Types of Constructors ?
+41.Can a constructor be private ? Where is it used ?
+42.Can a constructor be final / static ?
+44.Use of this, this() keyword ?
+
+--- Encapsulation and Abstraction ---
+22.What is Encapsulation in java ?
+23.What is Abstraction, what is its use ?
+
+--- Inheritance and Relationships ---
+24.What is Inheritance ?
+25.What are rules to inherit and how its achieved in JAVA ?
+26.Restrictions while implementing Inheritance ? like final class
+27.extends vs implements ?
+45.Use of super, super() keyword ?
+43.What is constructor chaining ?
+28.What is IS-A relationship ?
+29.What is HAS-A relationship ?
+30.Composition vs Inheritance ?
+31.Why prefer composition over inheritance ?
+32.Association vs Aggregation vs Composition ?
+
+--- static Keyword and Blocks ---
+58.Static variable vs instance variable ?
+59.Can we access non-static member from static method ?
+56.What is static block ? When does it run ?
+57.What is instance block ? When does it run ?
+55.Order of loading a class in jvm ? instance block, constructor, static block ?
+
+--- final Keyword ---
+60.What is final variable ?
+61.What is blank final variable ?
+62.What is effectively final ?
+
+--- Polymorphism and Overriding Rules ---
+33.What is Polymorphism, how its achieved in java ?
+34.Runtime vs Compiletime polymorphism in java ?
+35.Can we override a static method ?
+36.Can we override a private method ?
+37.What is method hiding ?
+38.What is covariant return type ?
+
+--- Interface and Abstract Class ---
+46.Interface vs Abstract class usage ? Why were they developed ?
+47.What is default method in interface ?
+48.Why were default methods introduced ?
+49.What is static method in interface ?
+50.What is private method in interface (Java 9) ?
+51.Diamond problem - how java solves it with default methods ?
+52.What is marker interface ? Examples ?
+53.What is functional interface ?
+54.Can functional interface have default methods ?
+
+--- Object Class, equals and hashCode ---
+64.Object class and its methods in java ?
+14.Difference between == and equals ?
+65.equals() implementation how and why ?
+15.instanceof, getClass() method in java, where do they belong ?
+66.hashCode() implementation how and why ?
+67.What is equals-hashCode contract ?
+68.What happens if we override equals but not hashCode ?
+69.What happens if we override hashCode but not equals ?
+70.Can two unequal objects have same hashCode ?
+71.What if hashCode uses mutable fields ?
+
+--- String ---
+72.String class and its use and its methods ?
+76.Why is String immutable ?
+77.What is String pool ?
+78.Where is String pool stored ?
+79.new String("abc") creates how many objects ?
+80.What does intern() do ?
+81.Why String is good as HashMap key ?
+82.Why char[] preferred over String for password ?
+83.How does + concatenation work internally ?
+73.StringBuilder and its use and its methods ?
+74.StringBuffer and its use and its methods ?
+75.String vs StringBuilder vs StringBuffer - when to use which ?
+
+--- Immutability, Records and Enums ---
+84.What is an immutable class ?
+63.final reference vs immutable object ?
+85.Steps to create immutable class ?
+86.How to handle mutable fields (Date, List) in immutable class ?
+87.Examples of immutable classes in JDK ?
+88.What are records (Java 16) ?
+89.Are records immutable ?
+13.enum in java ?
+
+--- Exception Handling ---
+90.What is Exception ?
+91.What is Error ?
+92.Hierarchy of exceptions ?
+93.Checked vs Unchecked exception ?
+94.Try catch finally block ?
+16.final, finally, finalize difference ?
+100.What is try-with-resources ?
+95.Exception hierarchy in catch block ?
+96.Multiple exception catching at once ?
+97.throw vs throws ?
+98.Where and how to use throw ?
+99.Where and how to use throws ?
+101.What is AutoCloseable ?
+102.What are suppressed exceptions ?
+103.Does finally run if return is in try ?
+104.When finally block does NOT run ?
+105.Can we have try without catch ?
+106.How to create custom checked exception ?
+107.How to create custom unchecked exception ?
+108.Rules for exceptions in method overriding ?
+109.What is exception chaining ?
+110.ClassNotFoundException vs NoClassDefFoundError ?
+111.OutOfMemoryError vs StackOverflowError ?
+112.How its handled in springboot project ?
+
+--- Java 8 : Lambda ---
+113.What is lambda expression ?
+114.Lambda syntax ?
+115.Why lambda can use only effectively final variables ?
+116.What is method reference ?
+117.Types of method reference ?
+
+--- Java 8 : Functional Interfaces ---
+118.What is Predicate ?
+119.What is Function ?
+120.What is Consumer ?
+121.What is Supplier ?
+122.What is BiFunction ?
+123.What is UnaryOperator / BinaryOperator ?
+
+--- Java 8 : Stream API ---
+124.What is Stream ?
+125.Collection vs Stream ?
+126.Intermediate vs Terminal operations ?
+127.What is lazy evaluation in stream ?
+128.map() vs flatMap() ?
+129.filter() usage ?
+130.reduce() usage ?
+131.findFirst() vs findAny() ?
+132.Can a stream be reused ?
+133.What is parallel stream ?
+134.When NOT to use parallel stream ?
+135.Collectors.toList() vs toSet() vs toMap() ?
+136.What is Collectors.groupingBy() ?
+137.What is Collectors.partitioningBy() ?
+138.What is Collectors.joining() ?
+139.How to handle duplicate keys in toMap() ?
+140.peek() usage ?
+141.sorted() with Comparator ?
+
+--- Optional ---
+142.What is Optional ?
+143.Why Optional introduced ?
+144.of() vs ofNullable() vs empty() ?
+145.orElse() vs orElseGet() ?
+146.orElseThrow() usage ?
+147.Should Optional be used as field / method param ?
+
+--- Date Time API ---
+148.Problems with old Date class ?
+149.LocalDate vs LocalDateTime vs ZonedDateTime ?
+150.Instant usage ?
+151.Duration vs Period ?
+
+--- Java 11 / 17 / 21 ---
+152.What is var ? Where can't we use it ?
+153.New String methods in Java 11 (isBlank, strip, lines, repeat) ?
+154.What are text blocks ?
+155.What are switch expressions ?
+156.What are sealed classes ?
+157.What is pattern matching for instanceof ?
+158.What are virtual threads (Java 21) ?
+159.Virtual thread vs platform thread ?
+
+--- Multithreading : Basics ---
+160.Multithreading and its purpose in java project ?
+161.Process vs Thread ?
+162.Which is main thread and how they are handled in java project ?
+163.How to create thread and how to use ?
+164.Runnable vs Thread ?
+165.Methods used in multithreading in java ?
+166.Thread lifecycle states ?
+167.start() vs run() ?
+168.Can we start a thread twice ?
+169.What is daemon thread ?
+170.sleep() vs wait() ?
+171.wait() vs notify() vs notifyAll() ?
+172.Why wait/notify are in Object class ?
+173.What is join() ?
+174.What is yield() ?
+175.What is thread priority ?
+
+--- Multithreading : Synchronization ---
+176.What is synchronisation in java ?
+177.synchronized method vs synchronized block ?
+178.Object level lock vs class level lock ?
+179.What is race condition ?
+180.What is deadlock ?
+181.How to avoid deadlock ?
+182.What is livelock ?
+183.What is starvation ?
+184.What is volatile ?
+185.volatile vs synchronized ?
+186.What is happens-before ?
+187.What is ThreadLocal ? Use case ?
+
+--- Concurrency (java.util.concurrent) ---
+188.What is ExecutorService ?
+189.Types of thread pools ?
+190.FixedThreadPool vs CachedThreadPool ?
+191.What is ThreadPoolExecutor ?
+192.Core pool size vs max pool size ?
+193.Rejection policies in thread pool ?
+194.submit() vs execute() ?
+195.shutdown() vs shutdownNow() ?
+196.Runnable vs Callable ?
+197.What is Future ?
+198.What is CompletableFuture ?
+199.thenApply() vs thenCompose() vs thenCombine() ?
+200.How to handle exception in CompletableFuture ?
+201.What is ReentrantLock ?
+202.synchronized vs ReentrantLock ?
+203.What is ReadWriteLock ?
+204.What is CountDownLatch ?
+205.What is CyclicBarrier ?
+206.CountDownLatch vs CyclicBarrier ?
+207.What is Semaphore ?
+208.What are Atomic classes ?
+209.What is CAS (Compare and Swap) ?
+
+--- JVM / Memory / GC ---
+210.JVM architecture ?
+211.Heap vs Stack memory ?
+212.Heap memory structure ?
+213.Young generation vs Old generation ?
+214.What is Eden, Survivor space ?
+215.What is Metaspace ?
+216.PermGen vs Metaspace ?
+217.Garbage collection in java ?
+218.Minor GC vs Major GC vs Full GC ?
+219.Types of garbage collectors ?
+220.What is G1 GC ?
+221.What is ZGC ?
+222.Can we force GC ? System.gc() ?
+223.What is memory leak in java ?
+224.Common causes of memory leak ?
+225.-Xms vs -Xmx ?
+226.What is JIT compiler ?
+
+--- Class Loading ---
+227.Class loaders in java ? How they are executed ?
+228.Types of class loaders ?
+229.What is parent delegation model ?
+230.Can we create custom class loader ?
+
+--- Serialization ---
+231.What is serialization ?
+232.What is serialVersionUID ?
+233.What is transient keyword ?
+234.Are static fields serialized ?
+235.Serializable vs Externalizable ?
+
+--- Cloning ---
+236.What is Cloneable ?
+237.Shallow copy vs Deep copy ?
+238.Copy constructor vs clone() ?
+
+--- Generics ---
+239.What are generics ?
+240.Why generics introduced ?
+241.What is type erasure ?
+242.What is <? extends T> ?
+243.What is <? super T> ?
+244.What is PECS rule ?
+245.Can we create generic array ?
+
+--- Reflection / Annotations ---
+246.What is reflection ?
+247.Where is reflection used (Spring, Hibernate) ?
+248.What is annotation ?
+249.How to create custom annotation ?
+250.What is @Retention ?
+251.What is @Target ?
+
+--- Design Patterns ---
+252.What is Singleton ?
+253.Thread-safe Singleton ?
+254.Double checked locking ?
+255.Why volatile in double checked locking ?
+256.How to break Singleton (reflection, serialization, cloning) ?
+257.Enum Singleton ?
+258.Factory pattern ?
+259.Builder pattern ?
+260.Strategy pattern ?
+261.Observer pattern ?
+262.Proxy pattern ?
+
+--- SOLID ---
+263.What is Single Responsibility ?
+264.What is Open/Closed ?
+265.What is Liskov Substitution ?
+266.What is Interface Segregation ?
+267.What is Dependency Inversion ?
+268.Example of each from your project ?
+
+
+========================================================================================================
+COLLECTIONS
+========================================================================================================
+
+--- Basics ---
+1.Collection vs Collections ?
+2.Collection hierarchy ?
+3.Iterable vs Collection ?
+4.Iterator vs ListIterator ?
+5.Iterator vs Enumeration ?
+6.Why Map does not extend Collection ?
+
+--- List ---
+7.Array vs ArrayList ?
+8.ArrayList vs LinkedList ?
+9.Vector vs ArrayList ?
+10.ArrayList default capacity ?
+11.How ArrayList grows internally ?
+12.ArrayList time complexity (get, add, remove) ?
+13.LinkedList time complexity ?
+14.When to use LinkedList over ArrayList ?
+15.How to make ArrayList synchronized ?
+16.What is CopyOnWriteArrayList ?
+17.When to use CopyOnWriteArrayList ?
+18.Arrays.asList() limitations ?
+19.List.of() vs Arrays.asList() ?
+20.remove(int) vs remove(Object) in List<Integer> ?
+
+--- Set ---
+21.HashSet vs LinkedHashSet vs TreeSet ?
+22.How HashSet works internally ?
+23.How HashSet avoids duplicates ?
+24.Does HashSet allow null ?
+25.Does TreeSet allow null ?
+26.How TreeSet sorts elements ?
+27.What is NavigableSet ?
+
+--- HashMap internals ---
+28.How HashMap works internally ?
+29.What is hashing ?
+30.What is bucket ?
+31.What is hash collision ?
+32.How collision is handled ?
+33.What is treeification (Java 8) ?
+34.When does bucket convert to tree ?
+35.Treeify threshold value ?
+36.What is load factor ?
+37.Default capacity and load factor ?
+38.What is rehashing ?
+39.Why capacity is power of 2 ?
+40.How get() works internally ?
+41.How put() works internally ?
+42.Can HashMap have null key ? How many ?
+43.Can HashMap have null values ?
+44.Is HashMap ordered ?
+45.HashMap time complexity ?
+
+--- HashMap keys ---
+46.Can we use mutable object as key ?
+47.What happens if key's hashCode changes ?
+48.Why String / Integer are good keys ?
+49.Custom class as key - what to override ?
+
+--- Other Maps ---
+50.HashMap vs Hashtable vs TreeMap ?
+51.HashMap vs LinkedHashMap ?
+52.How LinkedHashMap maintains order ?
+53.Access order in LinkedHashMap ?
+54.Implement LRU cache using LinkedHashMap ?
+55.TreeMap internal structure (Red-Black tree) ?
+56.What is NavigableMap ?
+57.What is WeakHashMap ?
+58.What is IdentityHashMap ?
+59.What is EnumMap ?
+
+--- ConcurrentHashMap ---
+60.Why ConcurrentHashMap ?
+61.HashMap vs Hashtable vs ConcurrentHashMap ?
+62.How ConcurrentHashMap works internally ?
+63.Segment locking (Java 7) vs CAS (Java 8) ?
+64.Does ConcurrentHashMap allow null ? Why not ?
+65.Is ConcurrentHashMap fail-safe ?
+66.synchronizedMap vs ConcurrentHashMap ?
+67.putIfAbsent() vs computeIfAbsent() ?
+
+--- Fail-fast / Fail-safe ---
+68.FailFast and FailSafe in collections ?
+69.What is ConcurrentModificationException ?
+70.What is modCount ?
+71.How to remove element while iterating ?
+72.Iterator.remove() vs list.remove() ?
+73.removeIf() usage ?
+
+--- Queue ---
+74.Queue vs Deque ?
+75.What is PriorityQueue ?
+76.How PriorityQueue orders elements ?
+77.What is ArrayDeque ?
+78.ArrayDeque vs Stack class ?
+79.What is BlockingQueue ?
+80.ArrayBlockingQueue vs LinkedBlockingQueue ?
+81.offer() vs add() ?
+82.poll() vs remove() ?
+83.peek() vs element() ?
+
+--- Immutable / Unmodifiable ---
+84.Collections.unmodifiableList() vs List.of() ?
+85.Is unmodifiable list truly immutable ?
+86.Can List.of() contain null ?
+
+--- Comparable / Comparator / Sorting ---
+87.Comparable interface ?
+88.Comparator interface ?
+89.Comparable vs Comparator ?
+90.How to use in simple code ?
+91.Inbuilt Comparator providers for java 8 ?
+92.Comparator.comparing() usage ?
+93.thenComparing() usage ?
+94.reversed() usage ?
+95.nullsFirst() / nullsLast() ?
+96.Collections.sort() vs List.sort() ?
+97.Sort map by value ?
+98.Sort map by key ?
+
+--- Java 8 Map methods ---
+99.getOrDefault() ?
+100.compute() vs computeIfAbsent() vs computeIfPresent() ?
+101.merge() usage ?
+102.forEach() on Map ?

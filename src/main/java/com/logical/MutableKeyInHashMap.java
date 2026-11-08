@@ -6,26 +6,29 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
-@Data
-@AllArgsConstructor
-class Student {
-	private int sid;
-	private String name;
+public class MutableKeyInHashMap {
 
-	@Override
-	public int hashCode() {
-		return this.getSid();
+	// nested so it does not clash with com.logical.Student in ArrayRelatedPractice
+	@Data
+	@AllArgsConstructor
+	private static class Student {
+		private int sid;
+		private String name;
+
+		@Override
+		public int hashCode() {
+			return this.getSid();
+		}
+		// if hashcode return same then only equals gets called
+		@Override
+		public boolean equals(Object obj) {
+			Student s = (Student) obj;
+			// NOTE: == compares String references; works here only because both names are
+			// string literals from the pool - use this.name.equals(s.name) in real code
+			return (this.name == s.name && this.sid == s.sid);
+		}
+
 	}
-	// if hashcode return same then only equals gets called
-	@Override
-	public boolean equals(Object obj) {
-		Student s = (Student) obj;
-		return (this.name == s.name && this.sid == s.sid);
-	}
-
-}
-
-public class ImmutableKey2 {
 
 	public static void main(String[] args) {
 		Map<Student, Integer> map1 = new HashMap<Student, Integer>();

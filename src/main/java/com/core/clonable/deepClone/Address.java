@@ -37,7 +37,8 @@ class Test {
 
         e2.address.city = "Pune";
 
-        System.out.println(e1.address.city); // Pune ❌
+        // deep copy -> e2 has its own Address, so changing e2 does not affect e1
+        System.out.println(e1.address.city); // Mumbai ✅ (shallow copy would print Pune)
     }
 }
 

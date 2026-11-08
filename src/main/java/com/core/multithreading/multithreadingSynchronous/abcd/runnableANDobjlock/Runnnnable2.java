@@ -1,4 +1,4 @@
-package runnableANDobjlock;
+package com.core.multithreading.multithreadingSynchronous.abcd.runnableANDobjlock;
 
 public class Runnnnable2 implements Runnable {
 

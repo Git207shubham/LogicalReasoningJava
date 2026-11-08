@@ -41,12 +41,14 @@ public class ListExamples {
 		System.out.println(myList1);
 
 
+		// NOTE: throws ClassCastException at runtime - toArray() returns Object[], which can't be cast to Integer[]
+		// use myList1.toArray(new Integer[0]) to get a real Integer[]
 		Object[] objectArray = (Integer[])myList1.toArray();
 		Stream.of(objectArray).forEach(System.out::println);
 
 
 		// list to array conversion
-		Object[] objectArray = myList1.stream().toArray(Integer[]::new);
+		objectArray = myList1.stream().toArray(Integer[]::new);
 		System.out.println("array type Integer "+(objectArray instanceof Integer[]));
 		System.out.println("array type PObject "+(objectArray instanceof Object[]));
 

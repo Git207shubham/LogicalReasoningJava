@@ -32,8 +32,7 @@ Person copy() {
 }
 
 
-==>
-Shallow copy using Copy constructor,
+==>Shallow copy using Copy constructor,
 Object reference single object or list or array of objects is always shared ie common,
 
 class Person {
@@ -47,7 +46,7 @@ class Person {
     }
 }
 
-Deep copy using Copy constructor
+==>Deep copy using Copy constructor
 class Person {
     int age;
     Address address;
@@ -68,14 +67,13 @@ Control	✔️ Full control	❌ Implicit behavior
 
 
 ======>
-
 deep or shallow depends on how Copy constrctor or clone overriden or Factory method clone is implemented
 Shallow vs Deep is about WHAT you copy, not HOW you copy.
 primitive field → always copied
 object field    → copied OR recreated (your choice)
 
-===
 
+=====>
 ArrayList<Integer> a1 = new ArrayList<>();
 a1.add(10);
 

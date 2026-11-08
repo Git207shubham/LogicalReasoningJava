@@ -1,4 +1,4 @@
-package pack1;
+package com.logical.mathRandom;
 import java.util.Random;
 
 public class RandomMath {

@@ -1,4 +1,4 @@
-package deadLock;
+package com.core.multithreading.multithreadingSynchronous.deadLock;
 
 public class DeadlockExample {
     public static void main(String[] args) {
@@ -7,6 +7,10 @@ public class DeadlockExample {
         Object resource2 = new Object();
 
         // Create Thread objects
+        // the two threads take the same locks in OPPOSITE order:
+        // thread1: resource1 -> resource2, thread2: resource2 -> resource1
+        // each holds one lock and waits for the other -> DEADLOCK (program never ends)
+        // fix: make every thread take the locks in the same order
         Thread thread1 = new Thread(new MyRunnable(resource1, resource2));
         Thread thread2 = new Thread(new MyRunnable(resource2, resource1));
 
@@ -36,6 +40,8 @@ class MyRunnable implements Runnable {
             }
             System.out.println(Thread.currentThread().getName() + ": Waiting for"+resource2);
             synchronized (resource2) {
+                // never reached when the deadlock happens
+                // NOTE: prints resource1 again; resource2 was probably intended
                 System.out.println(Thread.currentThread().getName() + ": Locked "+resource1);
             }
         }

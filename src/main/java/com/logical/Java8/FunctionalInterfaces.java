@@ -1,4 +1,4 @@
-package Java8;
+package com.logical.Java8;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +11,8 @@ public class FunctionalInterfaces {
 
 		Random random = new Random();
 
+		// Supplier<T> takes no input and returns a value: T get()
+		// here it returns a random string from the list each time get() is called
 		Supplier<String> supplier = () -> {
 
 			List<String> list = Arrays.asList("aa", "bb", "dd", "ww", "cc");

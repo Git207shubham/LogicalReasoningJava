@@ -12,7 +12,7 @@ public class EvenOdd {
 
 		Odd o2 = new Odd(21, 31);
 
-		// above are not threads
+		// above are not threads, only Runnable tasks (they implement Runnable, not extend Thread)
 
 		Thread t1 = new Thread(e1);
 
@@ -31,6 +31,8 @@ public class EvenOdd {
 		t3.setName("ODD_1_");
 		t4.setName("ODD_2");
 
+		// start() creates a new thread that calls run(); calling run() directly would
+		// just execute it on the main thread
 		t1.start();
 		t2.start();
 		t3.start();
@@ -61,6 +63,7 @@ class Even implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			// extra i++ (plus the loop's i++) -> steps by 2, so only even (or only odd) numbers print
 			i++;
 
 		}

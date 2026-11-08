@@ -1,9 +1,9 @@
 package com.logical.if_else;
 
 /*
- * CONTROL FLOW in one place: if / else-if / ternary / switch / loops / break / continue.
- * (Replaces old A.java + B.java which duplicated numberRelated/AllLoops.java)
+ * CONTROL FLOW in one place: if / else-if / ternary / switch / loops / break / continue
  */
+
 public class ControlFlow {
 
     public static void main(String[] args) {
@@ -13,7 +13,8 @@ public class ControlFlow {
         loops();
     }
 
-    // if / else-if / else : first TRUE condition wins, rest are skipped
+    // if / else-if / else : first TRUE condition wins, rest blocks are skipped
+    // else is not compulsary  -- write else when you require default fallback
     static void grade(int marks) {
         if (marks >= 90) {
             System.out.println("A");
@@ -26,7 +27,7 @@ public class ControlFlow {
         }
     }
 
-    // ternary : condition ? valueIfTrue : valueIfFalse  (short if-else that RETURNS a value)
+    // ternary : condition ? valueIfTrue : valueIfFalse
     static int maxOfTwo(int a, int b) {
         return a > b ? a : b;
     }
